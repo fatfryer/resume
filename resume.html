@@ -24,7 +24,7 @@
         }
         /* SIDEBAR */
         .sidebar {
-            width: 30%;
+            width: 33%;
             min-width: 260px;
             background: #B61E2E;
             color: white;
@@ -34,12 +34,15 @@
             align-items: center;
         }
         .sidebar img {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             border: 5px solid rgba(255,255,255,0.12);
             object-fit: cover;
             margin-bottom: 22px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .sidebar h1 {
             font-family: 'Playfair Display', serif;
@@ -50,24 +53,36 @@
             letter-spacing: 0.3px;
         }
         .sidebar .title-label {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #000000;
+            color: white;
             margin-bottom: 32px;
+            text-align: center;
         }
         .sidebar-section {
             width: 100%;
-            margin-bottom: 30px;
             font-size: 13.5px;
         }
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            padding: 20px 15px;
+            margin-bottom: 20px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .sidebar-card:last-child { margin-bottom: 0; }
         .sidebar-section-title {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2.5px;
-            color: #000000;
+            color: white;
             margin-bottom: 14px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 8px;
@@ -116,7 +131,7 @@
         }
         .main h2 {
             font-family: 'Source Sans 3', sans-serif;
-            font-size: 14px;
+            font-size: 21px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2.5px;
@@ -177,6 +192,17 @@
             color: #B61E2E;
             margin-bottom: 5px;
         }
+        .analytics-subheader {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+        .analytics-subheader a {
+            color: #B61E2E;
+            text-decoration: none;
+        }
+        .analytics-subheader a:hover { text-decoration: underline; }
         .analytics-desc {
             font-size: 14.5px;
             line-height: 1.7;
@@ -193,6 +219,57 @@
             color: #888;
             font-weight: 400;
         }
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #e8a030;
+            text-align: left;
+        }
+        .main-header-left {
+            /* Name + Title stacked vertically */
+        }
+        .main-header-right {
+            text-align: right;
+        }
+        .main-header-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 13.5px;
+            color: #444;
+            align-items: flex-end;
+        }
+        .main-header-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #B61E2E;
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+        .main-header-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 28px;
+            color: #1a2e4a;
+            margin: 0 0 6px;
+        }
+        .main-header-title {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin: 0 0 18px;
+        }
+        .main-header-contact a {
+            color: #B61E2E;
+            text-decoration: none;
+        }
+        .main-header-contact a:hover { text-decoration: underline; }
         .entry-date {
             float: right;
             font-size: 12px;
@@ -209,56 +286,67 @@
         @media print {
             @page { size: US Letter; margin: 0; }
             html, body { margin: 0; padding: 0; background: white !important; height: 100% !important; }
-            .resume { margin: 0 !important; box-shadow: none !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: 30% 70% !important; height: 100% !important; padding: 0 !important; }
-            .sidebar { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; min-width: auto !important; align-self: stretch !important; padding: 0.5in 15px 0.5in 0.5in !important; line-height: 1.5 !important; }
-            .main { padding: 0.5in 25px !important; align-self: stretch !important; }
+            .resume { margin: 0 !important; box-shadow: none !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: 33% 67% !important; height: 100% !important; padding: 0 !important; }
+            .sidebar { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; min-width: auto !important; align-self: stretch !important; padding: 0.5in !important; line-height: 1.5 !important; }
+            .main { padding: 0.5in !important; align-self: stretch !important; }
             .sidebar, .main, .section, .analytics-item { page-break-inside: avoid; }
             .section { margin-bottom: 24px !important; }
             .analytics-item { margin-bottom: 16px !important; }
             .sidebar-section { margin-bottom: 20px !important; font-size: 11px !important; }
-            .sidebar img { width: 100px !important; height: 100px !important; margin-bottom: 18px !important; }
+            .sidebar-card {
+                background: rgba(255, 255, 255, 0.18) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                padding: 15px 12px !important;
+                margin-bottom: 15px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                width: 95% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                text-align: center !important;
+            }
+            .sidebar img { width: 120px !important; height: 120px !important; margin-bottom: 18px !important; display: block !important; margin-left: auto !important; margin-right: auto !important; }
             .sidebar h1 { font-size: 20px !important; }
-            .sidebar .title-label { font-size: 10px !important; margin-bottom: 20px !important; }
             .sidebar-section-title { font-size: 9px !important; margin-bottom: 8px !important; padding-bottom: 4px !important; }
             .skill-item { font-size: 11px !important; margin-bottom: 6px !important; }
             .contact-item { font-size: 11px !important; margin-bottom: 8px !important; }
-            .main h2 { font-size: 13px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
+            .main h2 { font-size: 20px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
             .analytics-title { font-size: 13px !important; }
+            .analytics-subheader { font-size: 11px !important; color: #666 !important; margin-bottom: 4px !important; }
             .analytics-desc, .exp-desc { font-size: 12px !important; line-height: 1.6 !important; }
             .entry-date { font-size: 11px !important; }
             .private-note { font-size: 10px !important; }
+            .main-header {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: flex-end !important;
+                margin-bottom: 24px !important;
+                padding-bottom: 16px !important;
+                border-bottom: 2px solid #e8a030 !important;
+            }
+            .main-header-contact {
+                font-size: 10px !important;
+                gap: 3px !important;
+                align-items: flex-end !important;
+            }
+            .main-header-img {
+                width: 80px !important;
+                height: 80px !important;
+                border: 3px solid #B61E2E !important;
+                margin-bottom: 12px !important;
+            }
+            .main-header-name { font-size: 22px !important; }
+            .main-header-title { font-size: 10px !important; margin-bottom: 12px !important; }
         }
     </style>
 </head>
 <body>
 <div class="resume">
 
-    <!-- SIDEBAR -->
+     <!-- SIDEBAR -->
     <div class="sidebar">
-        <img src="headshot.jpg" alt="John Duan">
-        <h1>John Duan</h1>
-        <p class="title-label">Video & Analytics Coordinator</p>
-
-        <div class="sidebar-section">
-            <div class="contact-item">
-                <span class="icon">✉</span>
-                <a href="mailto:duanjohn99@gmail.com">duanjohn99@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                <span class="icon">☎</span>
-                (248) 804-2111
-            </div>
-            <div class="contact-item">
-                <span class="icon">𝕏</span>
-                <a href="https://twitter.com/LearningVolley">@LearningVolley</a>
-            </div>
-            <div class="contact-item">
-                <span class="icon">🌐</span>
-                <a href="https://learningvolleyball.com">learningvolleyball.com</a>
-            </div>
-        </div>
-
-        <div class="sidebar-section">
+        <img src="headshot.png" alt="John Duan" class="sidebar-profile-img">
+        <div class="sidebar-section sidebar-card">
             <div class="sidebar-section-title">Technical & Video Skills</div>
             <div class="skill-item"><strong>Video Analysis</strong> <span class="skill-detail">Hudl, DataVolley</span></div>
             <div class="skill-item"><strong>Data Analysis</strong> <span class="skill-detail">Python, pandas</span></div>
@@ -268,13 +356,13 @@
             <div class="skill-item"><strong>Social Media</strong> <span class="skill-detail">YouTube, Instagram, TikTok</span></div>
         </div>
 
-        <div class="sidebar-section">
+        <div class="sidebar-section sidebar-card">
             <div class="sidebar-section-title">Certification</div>
                 <strong>USA Volleyball Certified</strong>
                 Great Lakes Region<br>2025 – Present
         </div>
 
-        <div class="sidebar-section">
+        <div class="sidebar-section sidebar-card">
             <div class="sidebar-section-title">Education</div>
             <strong>University of Michigan</strong>
             B.S. Data Science & Economics<br>
@@ -284,17 +372,33 @@
 
     <!-- MAIN -->
     <div class="main">
+        <div class="main-header">
+            <div class="main-header-left">
+                <h1 class="main-header-name">John Duan</h1>
+                <p class="main-header-title">Video & Analytics Coordinator</p>
+            </div>
+            <div class="main-header-right">
+                <div class="main-header-contact">
+                    <span>✉ duanjohn99@gmail.com</span>
+                    <span>☎ (248) 804-2111</span>
+                    <span>𝕏 <a href="https://x.com/LearningVolley">@LearningVolley</a></span>
+                    <span>🌐 <a href="https://learningvolleyball.com">learningvolleyball.com</a></span>
+                </div>
+            </div>
+        </div>
 
         <div class="section">
             <h2>Volleyball Analytics, Film & Coaching</h2>
 
             <div class="analytics-item">
-                <div class="analytics-title">Custom Hudl Reporting Dashboard — <a href="#">fhs.learningvolleyball.com</a> <span class="private-note">(private, access upon request)</span> <span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-title">Custom Hudl Reporting Dashboard <span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-subheader"><a href="#">fhs.learningvolleyball.com</a> <span class="private-note">(private, access upon request)</span></div>
                 <div class="analytics-desc">Built a custom Hudl analytics pipeline to extract play-by-play data, generate rotation breakdowns, and automate post-match reports for scouting, lineup evaluation, and opponent prep.</div>
             </div>
 
             <div class="analytics-item">
-                <div class="analytics-title">Volleyball Analytics - @LearningVolley<span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-title">Volleyball Analytics <span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-subheader"><a href="https://x.com/LearningVolley">@LearningVolley</a> on X</div>
                 <div class="analytics-desc">Established volleyball analytics presence followed by coaches across Big Ten, SEC, and Big South programs, sharing match insights, statistical breakdowns, and coaching-focused analysis.</div>
             </div>
 
@@ -309,7 +413,8 @@
 
         <div class="section">
             <div class="analytics-item">
-                <div class="analytics-title">Assistant Coach — Farmington High School <span class="private-note">(Top 5 Ranked in Michigan)</span> <span class="entry-date">2026 – Present</span></div>
+                <div class="analytics-title">Assistant Coach <span class="entry-date">2026 – Present</span></div>
+                <div class="analytics-subheader">Farmington High School <span class="private-note">(Top 5 Ranked in Michigan)</span></div>
                 <div class="analytics-desc">Head coach for JV program and varsity support staff for a Top-5 ranked boys program in Michigan. Manage match stats, opponent scouting, and film review while supporting practices and player development.</div>
             </div>
         </div>
@@ -318,7 +423,8 @@
             <h2>Professional Background</h2>
 
             <div class="analytics-item">
-                <div class="analytics-title">Machine Learning Engineer · Amazon <span class="entry-date">2022 – 2024</span></div>
+                <div class="analytics-title">Machine Learning Engineer <span class="entry-date">2022 – 2024</span></div>
+                <div class="analytics-subheader">Amazon</div>
                 <div class="analytics-desc">Built data systems and analytical workflows at scale.</div>
             </div>
         </div>
