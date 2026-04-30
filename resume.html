@@ -34,8 +34,8 @@
             align-items: center;
         }
         .sidebar img {
-            width: 180px;
-            height: 180px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             border: 5px solid rgba(255,255,255,0.12);
             object-fit: cover;
@@ -53,7 +53,7 @@
             letter-spacing: 0.3px;
         }
         .sidebar .title-label {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -63,7 +63,7 @@
         }
         .sidebar-section {
             width: 100%;
-            font-size: 13.5px;
+            font-size: 17px;
         }
         .sidebar-card {
             background: rgba(255, 255, 255, 0.18);
@@ -77,8 +77,11 @@
             text-align: center;
         }
         .sidebar-card:last-child { margin-bottom: 0; }
+        .sidebar-card .skill-item {
+            text-align: left;
+        }
         .sidebar-section-title {
-            font-size: 12px;
+            font-size: 17px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2.5px;
@@ -86,13 +89,16 @@
             margin-bottom: 14px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 8px;
+            white-space: nowrap;
+            width: 100%;
+            box-sizing: border-box;
         }
         .contact-item {
             display: flex;
             align-items: flex-start;
             gap: 10px;
             margin-bottom: 12px;
-            font-size: 13.5px;
+            font-size: 17px;
             color: rgba(255,255,255,0.88);
             line-height: 1.4;
         }
@@ -108,7 +114,7 @@
         }
         .contact-item a:hover { text-decoration: underline; }
         .skill-item {
-            font-size: 13.5px;
+            font-size: 17px;
             color: rgba(255,255,255,0.88);
             margin-bottom: 10px;
             line-height: 1.4;
@@ -121,7 +127,7 @@
         .skill-item .skill-detail {
             color: rgba(255,255,255,0.55);
             font-style: italic;
-            font-size: 12.5px;
+            font-size: 16px;
         }
 
         /* MAIN */
@@ -130,8 +136,8 @@
             padding: 50px 45px;
         }
         .main h2 {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 21px;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2.5px;
@@ -141,8 +147,11 @@
             margin: 0 0 22px;
         }
         .section { margin-bottom: 36px; }
+        .section:first-child {
+            margin-top: 20px;
+        }
         .section p {
-            font-size: 15px;
+            font-size: 19px;
             line-height: 1.75;
             color: #3a3a3a;
             margin: 0;
@@ -168,7 +177,7 @@
             font-weight: 400;
         }
         .exp-desc {
-            font-size: 14.5px;
+            font-size: 18px;
             line-height: 1.7;
             color: #444;
             margin: 6px 0 0;
@@ -187,13 +196,13 @@
         }
         .analytics-item:last-child { margin-bottom: 0; }
         .analytics-title {
-            font-size: 15px;
+            font-size: 19px;
             font-weight: 600;
             color: #B61E2E;
             margin-bottom: 5px;
         }
         .analytics-subheader {
-            font-size: 13px;
+            font-size: 16px;
             color: #666;
             margin-bottom: 5px;
             line-height: 1.5;
@@ -204,7 +213,7 @@
         }
         .analytics-subheader a:hover { text-decoration: underline; }
         .analytics-desc {
-            font-size: 14.5px;
+            font-size: 18px;
             line-height: 1.7;
             color: #444;
         }
@@ -214,7 +223,7 @@
         }
         .analytics-desc a:hover { text-decoration: underline; }
         .private-note {
-            font-size: 11px;
+            font-size: 14px;
             font-style: italic;
             color: #888;
             font-weight: 400;
@@ -224,9 +233,7 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 36px;
-            padding-bottom: 24px;
-            border-bottom: 2px solid #e8a030;
-            text-align: left;
+            margin-top: 90px;
         }
         .main-header-left {
             /* Name + Title stacked vertically */
@@ -238,7 +245,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            font-size: 13.5px;
+            font-size: 17px;
             color: #444;
             align-items: flex-end;
         }
@@ -253,12 +260,12 @@
         .main-header-name {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
-            font-size: 28px;
+            font-size: 35px;
             color: #1a2e4a;
             margin: 0 0 6px;
         }
         .main-header-title {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -272,7 +279,7 @@
         .main-header-contact a:hover { text-decoration: underline; }
         .entry-date {
             float: right;
-            font-size: 12px;
+            font-size: 15px;
             font-weight: 600;
             color: #666;
         }
@@ -287,12 +294,13 @@
             @page { size: US Letter; margin: 0; }
             html, body { margin: 0; padding: 0; background: white !important; height: 100% !important; }
             .resume { margin: 0 !important; box-shadow: none !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: 33% 67% !important; height: 100% !important; padding: 0 !important; }
-            .sidebar { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; min-width: auto !important; align-self: stretch !important; padding: 0.5in !important; line-height: 1.5 !important; }
-            .main { padding: 0.5in !important; align-self: stretch !important; }
+            .sidebar { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; min-width: auto !important; align-self: stretch !important; padding: 0.3in !important; line-height: 1.5 !important; }
+            .main { padding: 0.3in !important; align-self: stretch !important; }
             .sidebar, .main, .section, .analytics-item { page-break-inside: avoid; }
             .section { margin-bottom: 24px !important; }
+            .section:first-child { margin-top: 20px !important; }
             .analytics-item { margin-bottom: 16px !important; }
-            .sidebar-section { margin-bottom: 20px !important; font-size: 11px !important; }
+            .sidebar-section { margin-bottom: 20px !important; font-size: 14px !important; }
             .sidebar-card {
                 background: rgba(255, 255, 255, 0.18) !important;
                 border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -300,32 +308,32 @@
                 margin-bottom: 15px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-                width: 95% !important;
+                width: 100% !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
                 text-align: center !important;
             }
-            .sidebar img { width: 120px !important; height: 120px !important; margin-bottom: 18px !important; display: block !important; margin-left: auto !important; margin-right: auto !important; }
+            .sidebar img { width: 190px !important; height: 190px !important; margin-bottom: 18px !important; display: block !important; margin-left: auto !important; margin-right: auto !important; }
             .sidebar h1 { font-size: 20px !important; }
-            .sidebar-section-title { font-size: 9px !important; margin-bottom: 8px !important; padding-bottom: 4px !important; }
-            .skill-item { font-size: 11px !important; margin-bottom: 6px !important; }
-            .contact-item { font-size: 11px !important; margin-bottom: 8px !important; }
-            .main h2 { font-size: 20px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
-            .analytics-title { font-size: 13px !important; }
-            .analytics-subheader { font-size: 11px !important; color: #666 !important; margin-bottom: 4px !important; }
-            .analytics-desc, .exp-desc { font-size: 12px !important; line-height: 1.6 !important; }
-            .entry-date { font-size: 11px !important; }
-            .private-note { font-size: 10px !important; }
+            .sidebar-section-title { font-size: 13px !important; margin-bottom: 8px !important; padding-bottom: 4px !important; white-space: nowrap !important; width: 100% !important; box-sizing: border-box !important; }
+            .sidebar-card .skill-item { text-align: left !important; }
+            .skill-item { font-size: 14px !important; margin-bottom: 6px !important; }
+            .contact-item { font-size: 14px !important; margin-bottom: 8px !important; }
+            .main h2 { font-family: 'Playfair Display', serif !important; font-size: 21px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
+            .analytics-title { font-size: 16px !important; }
+            .analytics-subheader { font-size: 14px !important; color: #666 !important; margin-bottom: 4px !important; }
+            .analytics-desc, .exp-desc { font-size: 15px !important; line-height: 1.6 !important; }
+            .entry-date { font-size: 14px !important; }
+            .private-note { font-size: 13px !important; }
             .main-header {
                 display: flex !important;
                 justify-content: space-between !important;
                 align-items: flex-end !important;
                 margin-bottom: 24px !important;
-                padding-bottom: 16px !important;
-                border-bottom: 2px solid #e8a030 !important;
+                margin-top: 60px !important;
             }
             .main-header-contact {
-                font-size: 10px !important;
+                font-size: 13px !important;
                 gap: 3px !important;
                 align-items: flex-end !important;
             }
@@ -335,8 +343,8 @@
                 border: 3px solid #B61E2E !important;
                 margin-bottom: 12px !important;
             }
-            .main-header-name { font-size: 22px !important; }
-            .main-header-title { font-size: 10px !important; margin-bottom: 12px !important; }
+            .main-header-name { font-size: 28px !important; }
+            .main-header-title { font-size: 13px !important; margin-bottom: 12px !important; }
         }
     </style>
 </head>
@@ -358,13 +366,14 @@
 
         <div class="sidebar-section sidebar-card">
             <div class="sidebar-section-title">Certification</div>
-                <strong>USA Volleyball Certified</strong>
-                Great Lakes Region<br>2025 – Present
+                <strong>USA Volleyball Certified</strong><br>
+                Great Lakes Region<br>
+                2025 – Present
         </div>
 
         <div class="sidebar-section sidebar-card">
             <div class="sidebar-section-title">Education</div>
-            <strong>University of Michigan</strong>
+            <strong>University of Michigan</strong><br>
             B.S. Data Science & Economics<br>
              Ann Arbor · 2021
         </div>
