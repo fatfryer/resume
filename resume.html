@@ -136,7 +136,7 @@
             padding: 50px 45px;
         }
         .main h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Source Sans 3', sans-serif;
             font-size: 22px;
             font-weight: 600;
             text-transform: uppercase;
@@ -147,8 +147,8 @@
             margin: 0 0 22px;
         }
         .section { margin-bottom: 36px; }
-        .section:first-child {
-            margin-top: 20px;
+        .main-header + .section {
+            margin-top: 100px;
         }
         .section p {
             font-size: 19px;
@@ -299,7 +299,7 @@
             .main { padding: 0.3in !important; align-self: stretch !important; }
             .sidebar, .main, .section, .analytics-item { page-break-inside: avoid; }
             .section { margin-bottom: 24px !important; }
-            .section:first-child { margin-top: 20px !important; }
+            .main-header + .section { margin-top: 100px !important; }
             .analytics-item { margin-bottom: 16px !important; }
             .sidebar-section { margin-bottom: 20px !important; font-size: 14px !important; }
             .sidebar-card {
@@ -320,7 +320,7 @@
             .sidebar-card .skill-item { text-align: left !important; }
             .skill-item { font-size: 14px !important; margin-bottom: 6px !important; }
             .contact-item { font-size: 14px !important; margin-bottom: 8px !important; }
-            .main h2 { font-family: 'Playfair Display', serif !important; font-size: 21px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
+            .main h2 { font-family: 'Source Sans 3', sans-serif !important; font-size: 21px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
             .analytics-title { font-size: 16px !important; }
             .analytics-subheader { font-size: 14px !important; color: #666 !important; margin-bottom: 4px !important; }
             .analytics-desc, .exp-desc { font-size: 15px !important; line-height: 1.6 !important; }
@@ -358,8 +358,7 @@
         <div class="sidebar-section sidebar-card">
             <div class="sidebar-section-title">Tech & Video Skills</div>
             <div class="skill-item"><strong>Video Analysis</strong> <span class="skill-detail">Hudl, DataVolley</span></div>
-            <div class="skill-item"><strong>Data Analysis</strong> <span class="skill-detail">Python, pandas</span></div>
-            <div class="skill-item"><strong>Data Visualization</strong> <span class="skill-detail">interactive dashboards, web tools</span></div>
+            <div class="skill-item"><strong>Data Analysis & Visualization</strong> <span class="skill-detail">Python, pandas, interactive dashboards, web tools</span></div>
             <div class="skill-item"><strong>Spreadsheets</strong> <span class="skill-detail">Excel, Google Sheets</span></div>
             <div class="skill-item"><strong>Video Editing</strong> <span class="skill-detail">DaVinci Resolve, Adobe Premiere, After Effects</span></div>
             <div class="skill-item"><strong>Social Media</strong> <span class="skill-detail">YouTube, Instagram, TikTok</span></div>
@@ -433,7 +432,7 @@
             <h2>Professional Background</h2>
 
             <div class="analytics-item">
-                <div class="analytics-title">Machine Learning Engineer <span class="entry-date">2022 – 2024</span></div>
+                <div class="analytics-title">Software Engineer<span class="entry-date">2022 – 2024</span></div>
                 <div class="analytics-subheader">Amazon</div>
                 <div class="analytics-desc">Built data systems and analytical workflows at scale.</div>
             </div>
