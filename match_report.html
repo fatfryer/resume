@@ -287,9 +287,17 @@ const DATA = {
   result:   "Win · 3–1",
   date:     "Oct 14, 2026",
   score:    "25–22, 22–25, 25–19, 25–21",
-  location: "Farmington HS Arena",
-  season:   "2026 Season",
+   arena: "Farmington HS Arena",
+   season:   "2026 Season",
 website:  "",
+
+  /* COLORS */
+  colors: {
+    primary: "#B61E2E",
+    accent: "#e8a030",
+    accentLight: "#e8c080",
+    neutralBg: "#fafaf8"
+  },
 
   /* MATCH OVERVIEW
      homeNum / awayNum are used only for coloring (higher or lower = better).
@@ -360,6 +368,15 @@ website:  "",
    END OF DATA BLOCK
    ================================================================ */
 
+function applyColors(colors) {
+  const root = document.documentElement.style;
+  root.setProperty("--primary", colors.primary);
+  root.setProperty("--accent", colors.accent);
+  root.setProperty("--accent-light", colors.accentLight);
+  root.setProperty("--neutral-bg", colors.neutralBg);
+}
+
+applyColors(DATA.colors);
 
 /* --- helpers --- */
 function effClass(v) {
@@ -378,7 +395,7 @@ document.getElementById('js-header').innerHTML = `
   <div class="header-meta">
     <span><strong>Date:</strong> ${DATA.date}</span>
     <span><strong>Score:</strong> ${DATA.score}</span>
-    <span><strong>Arena:</strong> ${DATA.location}</span>
+     <span><strong>Arena:</strong> ${DATA.arena}</span>
   </div>`;
 
 /* --- MATCH OVERVIEW (home | metric | away) --- */

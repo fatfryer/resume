@@ -440,5 +440,25 @@
 
     </div>
 </div>
+<script>
+const RESUME_DATA = {
+  colors: {
+    primary: "#B61E2E",
+    accent: "#e8a030",
+    accentLight: "#e8c080",
+    neutralBg: "#fafaf8"
+  }
+};
+
+function applyColors(colors) {
+  const root = document.documentElement.style;
+  root.setProperty("--primary", colors.primary);
+  root.setProperty("--accent", colors.accent);
+  root.setProperty("--accent-light", colors.accentLight);
+  root.setProperty("--neutral-bg", colors.neutralBg);
+}
+
+applyColors(RESUME_DATA.colors);
+</script>
 </body>
 </html>
