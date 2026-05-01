@@ -6,6 +6,12 @@
     <title>John Duan - Volleyball Coach Resume</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #B61E2E;
+            --accent: #e8a030;
+            --accent-light: #e8c080;
+            --neutral-bg: #fafaf8;
+        }
         * { box-sizing: border-box; }
         body {
             font-family: 'Source Sans 3', sans-serif;
@@ -17,7 +23,7 @@
         .resume {
             max-width: 1060px;
             margin: 40px auto;
-            background: #fafaf8;
+            background: var(--neutral-bg);
             box-shadow: 0 6px 40px rgba(0,0,0,0.13);
             display: flex;
             min-height: 100vh;
@@ -26,7 +32,7 @@
         .sidebar {
             width: 33%;
             min-width: 260px;
-            background: #B61E2E;
+            background: var(--primary);
             color: white;
             padding: 50px 30px;
             display: flex;
@@ -109,7 +115,7 @@
             opacity: 0.6;
         }
         .contact-item a {
-            color: #e8c080;
+            color: var(--accent-light);
             text-decoration: none;
         }
         .contact-item a:hover { text-decoration: underline; }
@@ -142,7 +148,7 @@
             text-transform: uppercase;
             letter-spacing: 2.5px;
             color: #1a2e4a;
-            border-bottom: 2px solid #e8a030;
+            border-bottom: 2px solid var(--accent);
             padding-bottom: 8px;
             margin: 0 0 22px;
         }
@@ -169,7 +175,7 @@
         .exp-title {
             font-size: 15px;
             font-weight: 600;
-            color: #B61E2E;
+            color: var(--primary);
         }
         .exp-org {
             font-size: 13.5px;
@@ -183,14 +189,14 @@
             margin: 6px 0 0;
         }
         .exp-desc a {
-            color: #B61E2E;
+            color: var(--primary);
             text-decoration: none;
         }
         .exp-desc a:hover { text-decoration: underline; }
 
         /* Analytics items — slightly different treatment */
         .analytics-item {
-            border-left: 3px solid #B61E2E;
+            border-left: 3px solid var(--primary);
             padding-left: 16px;
             margin-bottom: 22px;
         }
@@ -208,7 +214,7 @@
             line-height: 1.5;
         }
         .analytics-subheader a {
-            color: #B61E2E;
+            color: var(--primary);
             text-decoration: none;
         }
         .analytics-subheader a:hover { text-decoration: underline; }
@@ -218,7 +224,7 @@
             color: #444;
         }
         .analytics-desc a {
-            color: #B61E2E;
+            color: var(--primary);
             text-decoration: none;
         }
         .analytics-desc a:hover { text-decoration: underline; }
@@ -254,7 +260,7 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 5px solid #B61E2E;
+            border: 5px solid var(--primary);
             object-fit: cover;
             margin-bottom: 16px;
         }
@@ -274,7 +280,7 @@
             margin: 0 0 18px;
         }
         .main-header-contact a {
-            color: #B61E2E;
+            color: var(--primary);
             text-decoration: none;
         }
         .main-header-contact a:hover { text-decoration: underline; }
@@ -341,7 +347,7 @@
             .main-header-img {
                 width: 80px !important;
                 height: 80px !important;
-                border: 3px solid #B61E2E !important;
+                border: 3px solid var(--primary) !important;
                 margin-bottom: 12px !important;
             }
             .main-header-name { font-size: 28px !important; }

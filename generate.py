@@ -22,16 +22,19 @@ def slugify(text):
 
 
 def replace_resume_colors(content, colors):
-    """Replace color values in resume.html RESUME_DATA.colors object."""
-    # Use word boundaries and specific JS object context to avoid CSS matches
-    replacements = [
-        (r'(RESUME_DATA.*?primary:\s*")[^"]*"', f'\\g<1>{colors["primary"]}"'),
-        (r'(RESUME_DATA.*?accent:\s*")[^"]*"', f'\\g<1>{colors["accent"]}"'),
-        (r'(RESUME_DATA.*?accentLight:\s*")[^"]*"', f'\\g<1>{colors["accent_light"]}"'),
-        (r'(RESUME_DATA.*?neutralBg:\s*")[^"]*"', f'\\g<1>{colors["neutral_bg"]}"'),
-    ]
-    for pattern, replacement in replacements:
-        content = re.sub(pattern, replacement, content, count=1, flags=re.DOTALL)
+    """Update RESUME_DATA.colors in resume.html template and CSS :root block."""
+    # Update JavaScript RESUME_DATA.colors
+    content = re.sub(r'(RESUME_DATA.*?primary:\s*")[^"]*"', f'\\1{colors["primary"]}"', content, flags=re.DOTALL)
+    content = re.sub(r'(RESUME_DATA.*?accent:\s*")[^"]*"', f'\\1{colors["accent"]}"', content, flags=re.DOTALL)
+    content = re.sub(r'(RESUME_DATA.*?accentLight:\s*")[^"]*"', f'\\1{colors["accent_light"]}"', content, flags=re.DOTALL)
+    content = re.sub(r'(RESUME_DATA.*?neutralBg:\s*")[^"]*"', f'\\1{colors["neutral_bg"]}"', content, flags=re.DOTALL)
+    
+    # Update CSS :root block to match
+    content = re.sub(r'(--primary:\s*)[^;]+;', f'\\1{colors["primary"]};', content)
+    content = re.sub(r'(--accent:\s*)[^;]+;', f'\\1{colors["accent"]};', content)
+    content = re.sub(r'(--accent-light:\s*)[^;]+;', f'\\1{colors["accent_light"]};', content)
+    content = re.sub(r'(--neutral-bg:\s*)[^;]+;', f'\\1{colors["neutral_bg"]};', content)
+    
     return content
 
 
