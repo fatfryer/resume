@@ -12,6 +12,8 @@
   :root {
     --primary:        #B61E2E;
     --accent:         #e8a030;
+    --accent-light:   #e8c080;
+    --neutral-bg:     #fafaf8;
     --primary-muted:  rgba(182,30,46,0.07);
     --accent-muted:   rgba(232,160,48,0.11);
   }
@@ -53,13 +55,14 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: rgba(255,255,255,0.5);
+    color: white;
+    opacity: 0.5;
     margin-bottom: 10px;
   }
   .result-badge {
     display: inline-block;
     background: var(--accent);
-    color: #1e1e1e;
+    color: var(--primary);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -74,12 +77,16 @@
     font-weight: 600;
     margin-bottom: 14px;
   }
+  .home-team-accent {
+    color: var(--accent);
+  }
   .header-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     font-size: 13.5px;
-    color: rgba(255,255,255,0.7);
+    color: white;
+    opacity: 0.7;
   }
   .header-meta span strong { color: white; }
 
@@ -296,7 +303,7 @@ website:  "",
     primary: "#B61E2E",
     accent: "#e8a030",
     accentLight: "#e8c080",
-    neutralBg: "#fafaf8"
+    neutralBg: "#CFC096"
   },
 
   /* MATCH OVERVIEW
@@ -391,7 +398,7 @@ function fmtEff(v) {
 document.getElementById('js-header').innerHTML = `
   <div class="pre-label">Post-Match Analysis</div>
   <div class="result-badge">${DATA.result}</div>
-  <h1>${DATA.homeTeam} vs. ${DATA.awayTeam}</h1>
+  <h1><span class="home-team-accent">${DATA.homeTeam}</span> vs. ${DATA.awayTeam}</h1>
   <div class="header-meta">
     <span><strong>Date:</strong> ${DATA.date}</span>
     <span><strong>Score:</strong> ${DATA.score}</span>

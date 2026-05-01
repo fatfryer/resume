@@ -10,7 +10,7 @@
             --primary: #B61E2E;
             --accent: #e8a030;
             --accent-light: #e8c080;
-            --neutral-bg: #fafaf8;
+            --neutral-bg: #CFC096;
         }
         * { box-sizing: border-box; }
         body {
@@ -91,7 +91,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2.5px;
-            color: white;
+            color: var(--accent);
             margin-bottom: 14px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 8px;
@@ -204,7 +204,7 @@
         .analytics-title {
             font-size: 19px;
             font-weight: 600;
-            color: #B61E2E;
+            color: var(--primary);
             margin-bottom: 5px;
         }
         .analytics-subheader {
@@ -322,7 +322,7 @@
             }
             .sidebar img { width: 190px !important; height: 190px !important; margin-bottom: 18px !important; display: block !important; margin-left: auto !important; margin-right: auto !important; }
             .sidebar h1 { font-size: 20px !important; }
-            .sidebar-section-title { font-size: 13px !important; margin-bottom: 8px !important; padding-bottom: 4px !important; white-space: nowrap !important; width: 100% !important; box-sizing: border-box !important; }
+            .sidebar-section-title { font-size: 13px !important; margin-bottom: 8px !important; padding-bottom: 4px !important; white-space: nowrap !important; width: 100% !important; box-sizing: border-box !important; color: var(--accent) !important; }
             .sidebar-card .skill-item { text-align: left !important; }
             .skill-item { font-size: 14px !important; margin-bottom: 6px !important; }
             .contact-item { font-size: 14px !important; margin-bottom: 8px !important; }
@@ -452,7 +452,7 @@ const RESUME_DATA = {
     primary: "#B61E2E",
     accent: "#e8a030",
     accentLight: "#e8c080",
-    neutralBg: "#fafaf8"
+    neutralBg: "#CFC096"
   }
 };
 
