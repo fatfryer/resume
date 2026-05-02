@@ -12,11 +12,9 @@
   :root {
     --primary:        #B61E2E;
     --accent:         #e8a030;
-    --accent-light:   #e8c080;
     --neutral-bg:     #fafaf8;
     --neg-color:       #B61E2E;
-    --primary-muted:  rgba(182,30,46,0.07);
-    --accent-muted:   rgba(232,160,48,0.11);
+    --primary-muted:  color-mix(in srgb, var(--primary) 7%, transparent);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -239,9 +237,9 @@
   .takeaway-list li {
     display: flex; gap: 14px; align-items: flex-start;
     padding: 14px 16px; border-radius: 5px;
-    font-size: 14px; line-height: 1.65; color: white;
+    font-size: 14px; line-height: 1.65; color: #1e1e1e;
     page-break-inside: avoid; break-inside: avoid;
-    background: var(--primary-muted); border-left: 3px solid var(--primary);
+    background: var(--primary-muted); border-left: 3px solid var(--accent);
   }
   .tw-tag {
     font-size: 9px; font-weight: 700; text-transform: uppercase;
@@ -337,7 +335,6 @@ website:  "",
   colors: {
     primary: "#B61E2E",
     accent: "#e8a030",
-    accentLight: "#e8c080",
     neutralBg: "#CFC096"
   },
 
@@ -415,7 +412,6 @@ function applyColors(colors) {
   const root = document.documentElement.style;
   root.setProperty("--primary", colors.primary);
   root.setProperty("--accent", colors.accent);
-  root.setProperty("--accent-light", colors.accentLight);
   root.setProperty("--neutral-bg", colors.neutralBg);
 
   // Also inject a style tag for print/PDF compatibility
@@ -425,7 +421,6 @@ function applyColors(colors) {
     :root {
       --primary: ${colors.primary};
       --accent: ${colors.accent};
-      --accent-light: ${colors.accentLight};
       --neutral-bg: ${colors.neutralBg};
     }
   `;

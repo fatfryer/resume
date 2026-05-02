@@ -72,11 +72,7 @@ def replace_report_data(content, row, colors):
         f'\\1{colors["accent"]}"',
         content, flags=re.DOTALL
     )
-    content = re.sub(
-        r'(DATA.*?colors.*?accentLight:\s*")[^"]*"',
-        f'\\1{colors["accent_light"]}"',
-        content, flags=re.DOTALL
-    )
+
     content = re.sub(
         r'(DATA.*?colors.*?neutralBg:\s*")[^"]*"',
         f'\\1{colors["neutral_bg"]}"',
