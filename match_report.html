@@ -14,6 +14,7 @@
     --accent:         #e8a030;
     --accent-light:   #e8c080;
     --neutral-bg:     #fafaf8;
+    --neg-color:       #B61E2E;
     --primary-muted:  rgba(182,30,46,0.07);
     --accent-muted:   rgba(232,160,48,0.11);
   }
@@ -36,8 +37,8 @@
 
   /* HEADER */
   .report-header {
-    background: var(--primary);
-    color: white;
+    background: var(--primary) !important;
+    color: white !important;
     padding: 36px 44px 32px;
     position: relative;
     overflow: hidden;
@@ -78,7 +79,7 @@
     margin-bottom: 14px;
   }
   .home-team-accent {
-    color: var(--accent);
+    color: var(--accent) !important;
   }
   .header-meta {
     display: flex;
@@ -167,7 +168,7 @@
   .bar-fill { height: 100%; border-radius: 3px; }
   .bar-fill.good { background: #2a7a3b; }
   .bar-fill.warn { background: #c0600a; }
-  .bar-fill.bad  { background: var(--primary); }
+  .bar-fill.bad  { background: var(--neg-color); }
   .bar-val { font-size: 13px; font-weight: 600; width: 36px; text-align: right; color: #333; flex-shrink: 0; }
 
   .diff-badge {
@@ -179,12 +180,12 @@
     white-space: nowrap;
   }
   .diff-badge.pos { background: rgba(42,122,59,0.10); color: #2a7a3b; }
-  .diff-badge.neg { background: rgba(182,30,46,0.08); color: var(--primary); }
+  .diff-badge.neg { background: rgba(182,30,46,0.08); color: var(--neg-color); }
   .diff-badge.mid { background: rgba(192,96,10,0.08); color: #c0600a; }
 
   .eff-good { color: #2a7a3b; font-weight: 700; }
   .eff-ok   { color: #c0600a; font-weight: 700; }
-  .eff-bad  { color: var(--primary); font-weight: 700; }
+  .eff-bad  { color: var(--neg-color); font-weight: 700; }
 
   /* PLAYER TABLE */
   .player-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
@@ -238,7 +239,7 @@
   .takeaway-list li {
     display: flex; gap: 14px; align-items: flex-start;
     padding: 14px 16px; border-radius: 5px;
-    font-size: 14px; line-height: 1.65;
+    font-size: 14px; line-height: 1.65; color: white;
     page-break-inside: avoid; break-inside: avoid;
     background: var(--primary-muted); border-left: 3px solid var(--primary);
   }
@@ -246,7 +247,7 @@
     font-size: 9px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 1.5px; padding: 3px 7px; border-radius: 3px;
     white-space: nowrap; margin-top: 2px; flex-shrink: 0;
-    background: var(--primary); color: white;
+    background: var(--accent); color: var(--primary);
   }
 
   /* FOOTER */
@@ -258,8 +259,42 @@
   .report-footer strong { color: #555; }
 
   @media print {
-    body { background: white; padding: 0; }
-    .report { box-shadow: none; }
+    body { background: white !important; padding:0 !important; }
+    .report { box-shadow: none !important; }
+    /* PRESERVE COLORS IN PDF */
+    .report-header {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .report-header::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Table headers */
+    .comparison-table thead tr,
+    .rotation-table thead tr,
+    .player-table thead tr {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Bar charts */
+    .bar-fill {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Badges */
+    .result-badge,
+    .diff-badge,
+    .tw-tag {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Takeaway items */
+    .takeaway-list li {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    @page { size: US Letter; margin: 0.5in; }
   }
   @media (max-width: 640px) {
     .report-body { padding: 28px 20px; }
@@ -376,11 +411,28 @@ website:  "",
    ================================================================ */
 
 function applyColors(colors) {
+  // Set CSS variables via inline styles
   const root = document.documentElement.style;
   root.setProperty("--primary", colors.primary);
   root.setProperty("--accent", colors.accent);
   root.setProperty("--accent-light", colors.accentLight);
   root.setProperty("--neutral-bg", colors.neutralBg);
+
+  // Also inject a style tag for print/PDF compatibility
+  const style = document.createElement('style');
+  style.id = 'print-colors';
+  style.textContent = `
+    :root {
+      --primary: ${colors.primary};
+      --accent: ${colors.accent};
+      --accent-light: ${colors.accentLight};
+      --neutral-bg: ${colors.neutralBg};
+    }
+  `;
+  // Remove old style tag if exists
+  const oldStyle = document.getElementById('print-colors');
+  if (oldStyle) oldStyle.remove();
+  document.head.appendChild(style);
 }
 
 applyColors(DATA.colors);
