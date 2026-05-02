@@ -3,7 +3,7 @@
 Unified HTML generator for resumes and match reports.
 Reads a unified CSV and generates BOTH resume + match report HTML files for each row.
 
-CSV columns: homeTeam,awayTeam,date,arena,primary,accent,accent_light,neutral_bg
+CSV columns: homeTeam,awayTeam,date,arena,primary,accent,neutral_bg
 
 Every row generates:
 - {slug_homeTeam}_resume.html (with colors from CSV)
@@ -26,15 +26,13 @@ def replace_resume_colors(content, colors):
     # Update JavaScript RESUME_DATA.colors
     content = re.sub(r'(RESUME_DATA.*?primary:\s*")[^"]*"', f'\\1{colors["primary"]}"', content, flags=re.DOTALL)
     content = re.sub(r'(RESUME_DATA.*?accent:\s*")[^"]*"', f'\\1{colors["accent"]}"', content, flags=re.DOTALL)
-    content = re.sub(r'(RESUME_DATA.*?accentLight:\s*")[^"]*"', f'\\1{colors["accent_light"]}"', content, flags=re.DOTALL)
     content = re.sub(r'(RESUME_DATA.*?neutralBg:\s*")[^"]*"', f'\\1{colors["neutral_bg"]}"', content, flags=re.DOTALL)
-    
+
     # Update CSS :root block to match
     content = re.sub(r'(--primary:\s*)[^;]+;', f'\\1{colors["primary"]};', content)
     content = re.sub(r'(--accent:\s*)[^;]+;', f'\\1{colors["accent"]};', content)
-    content = re.sub(r'(--accent-light:\s*)[^;]+;', f'\\1{colors["accent_light"]};', content)
     content = re.sub(r'(--neutral-bg:\s*)[^;]+;', f'\\1{colors["neutral_bg"]};', content)
-    
+
     return content
 
 
@@ -103,7 +101,6 @@ def main():
             colors = {
                 "primary": row["primary"].strip(),
                 "accent": row["accent"].strip(),
-                "accent_light": row["accent_light"].strip(),
                 "neutral_bg": row["neutral_bg"].strip(),
             }
 

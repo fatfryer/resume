@@ -1,3 +1,8 @@
-homeTeam,awayTeam,date,arena,primary,accent,accent_light,neutral_bg
-Farmington,Rochester Adams,Oct 14 2026,Farmington HS Arena,#B61E2E,#e8a030,#e8c080,#fafaf8
-University of Michigan,Ohio State,Nov 05 2026,Crisler Center,#00274C,#FFCB05,#FFE17A,#fafaf8
+homeTeam,awayTeam,date,arena,primary,accent,neutral_bg
+Farmington,Rochester Adams,Oct 14 2026,Farmington HS Arena,#B61E2E,#e8a030,#fafaf8
+University of Michigan,Ohio State,Nov 05 2026,Crisler Center,#00274C,#FFCB05,#fafaf8
+University of Illinois Urbana-Champaign,Northwestern,Oct 21 2026,Huff Hall,#E87722,#13294B,#fafaf8
+Northwestern University,Illinois,Nov 02 2026,Welsh-Ryan Arena,#4E2A84,#B6ACD1,#fafaf8
+Indiana University Bloomington,Purdue,Oct 28 2026,Wilkinson Hall,#990000,#EDEBEB,#fafaf8
+Indiana University Indianapolis,Northern Kentucky University,Nov 09 2026,IU Indianapolis Gym,#990000,#EDEBEB,#fafaf8
+Butler University,Xavier University,Nov 16 2026,Hinkle Fieldhouse,#13294B,#D1E0D7,#fafaf8
