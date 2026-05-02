@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     SCHOOL COLORS — change these 2 lines to reskin for any school
+     ============================================================ */
+  :root {
+    --primary:        #B61E2E;
+    --accent:         #e8a030;
+    --accent-light:   #e8c080;
+    --neutral-bg:     #fafaf8;
+    --neg-color:       #B61E2E;
+    --primary-muted:  rgba(182,30,46,0.07);
+    --accent-muted:   rgba(232,160,48,0.11);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #f0ede8;
+    color: #1e1e1e;
+    padding: 40px 20px;
+  }
+
+  .report {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fafaf8;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.12);
+  }
+
+  /* HEADER */
+  .report-header {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 36px 44px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 260px; height: 100%;
+    background: rgba(0,0,0,0.08);
+    clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  .pre-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: white;
+    opacity: 0.5;
+    margin-bottom: 10px;
+  }
+  .result-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  .report-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .home-team-accent {
+    color: var(--accent) !important;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 13.5px;
+    color: white;
+    opacity: 0.7;
+  }
+  .header-meta span strong { color: white; }
+
+  /* BODY */
+  .report-body { padding: 40px 44px; }
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #1a2e4a;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* COMPARISON TABLE (Match Overview) */
+  .comparison-table { width: 100%; border-collapse: collapse; }
+  .comparison-table thead tr { background: #f5f2ed; }
+  .comparison-table th {
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #e8e4df;
+  }
+  .comparison-table th.home-col { color: var(--primary); text-align: right; }
+  .comparison-table th.away-col { color: #777; text-align: left; }
+  .comparison-table th.metric-col { text-align: center; color: #aaa; }
+  .comparison-table td {
+    padding: 9px 14px;
+    font-size: 14.5px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0ede8;
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table td.home-val { text-align: right; }
+  .comparison-table td.away-val { text-align: left; }
+  .comparison-table td.metric-label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #888;
+    white-space: nowrap;
+  }
+  .val-better { color: #2a7a3b; }
+  .val-worse  { color: #b0b0b0; font-weight: 400; }
+  .val-neutral { color: #444; }
+
+  /* ROTATION TABLE */
+  .rotation-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .rotation-table thead tr { background: #f5f2ed; }
+  .rotation-table th {
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    border-bottom: 2px solid #e8e4df;
+  }
+  .rotation-table th.num-col { text-align: right; }
+  .rotation-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f0ede8;
+    color: #444;
+    vertical-align: middle;
+  }
+  .rotation-table td.num-col { text-align: right; }
+  .rotation-table tr:last-child td { border-bottom: none; }
+  .rotation-table tr.flag-row td { background: rgba(182,30,46,0.04); }
+
+  .bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .bar-bg { flex: 1; height: 6px; background: #ede9e3; border-radius: 3px; overflow: hidden; min-width: 55px; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .bar-fill.good { background: #2a7a3b; }
+  .bar-fill.warn { background: #c0600a; }
+  .bar-fill.bad  { background: var(--neg-color); }
+  .bar-val { font-size: 13px; font-weight: 600; width: 36px; text-align: right; color: #333; flex-shrink: 0; }
+
+  .diff-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .diff-badge.pos { background: rgba(42,122,59,0.10); color: #2a7a3b; }
+  .diff-badge.neg { background: rgba(182,30,46,0.08); color: var(--neg-color); }
+  .diff-badge.mid { background: rgba(192,96,10,0.08); color: #c0600a; }
+
+  .eff-good { color: #2a7a3b; font-weight: 700; }
+  .eff-ok   { color: #c0600a; font-weight: 700; }
+  .eff-bad  { color: var(--neg-color); font-weight: 700; }
+
+  /* PLAYER TABLE */
+  .player-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .player-table thead tr { background: #f5f2ed; }
+  .player-table th {
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    border-bottom: 2px solid #e8e4df;
+  }
+  .player-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f0ede8;
+    color: #444;
+  }
+  .player-table tr:last-child td { border-bottom: none; }
+  .player-table td.pos {
+    font-size: 11px; font-weight: 700; color: #aaa;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* CHARTS */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* ONE COLUMN LAYOUT - Each chart gets its own full row */
+    .one-col {
+      display: grid;
+      grid-template-columns: 1fr;        /* Single column */
+      gap: 32px;                         /* More breathing room between charts */
+      max-width: 1000px;                 /* Optional: nice max width */
+      margin: 0 auto;                    /* Centers the whole thing */
+    }
+  .col-card { page-break-inside: avoid; break-inside: avoid; }
+  .chart-wrap {
+    position: relative; border-radius: 5px; overflow: hidden;
+    background: #f5f2ed; min-height: 150px;
+  }
+  .chart-wrap img { width: 100%; display: block; border-radius: 5px; }
+  .chart-placeholder {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 150px; color: #bbb; font-size: 12px; gap: 6px;
+  }
+  .chart-placeholder .ph-icon { font-size: 26px; opacity: 0.4; }
+  .chart-caption { font-size: 12px; color: #888; font-style: italic; margin-top: 8px; }
+
+  /* TAKEAWAYS */
+  .takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .takeaway-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 16px; border-radius: 5px;
+    font-size: 14px; line-height: 1.65; color: white;
+    page-break-inside: avoid; break-inside: avoid;
+    background: var(--primary-muted); border-left: 3px solid var(--primary);
+  }
+  .tw-tag {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; padding: 3px 7px; border-radius: 3px;
+    white-space: nowrap; margin-top: 2px; flex-shrink: 0;
+    background: var(--accent); color: var(--primary);
+  }
+
+  /* FOOTER */
+  .report-footer {
+    background: #f5f2ed; padding: 16px 44px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid #e8e4df; font-size: 12px; color: #999;
+  }
+  .report-footer strong { color: #555; }
+
+  @media print {
+    body { background: white !important; padding:0 !important; }
+    .report { box-shadow: none !important; }
+    /* PRESERVE COLORS IN PDF */
+    .report-header {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .report-header::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Table headers */
+    .comparison-table thead tr,
+    .rotation-table thead tr,
+    .player-table thead tr {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Bar charts */
+    .bar-fill {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Badges */
+    .result-badge,
+    .diff-badge,
+    .tw-tag {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    /* Takeaway items */
+    .takeaway-list li {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    @page { size: US Letter; margin: 0.5in; }
+  }
+  @media (max-width: 640px) {
+    .report-body { padding: 28px 20px; }
+    .report-header { padding: 28px 20px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="report">
+  <div class="report-header" id="js-header"></div>
+  <div class="report-body">
+    <div class="section" id="js-overview"></div>
+    <div class="section" id="js-rotations"></div>
+    <div class="section" id="js-players"></div>
+    <div class="section" id="js-charts"></div>
+    <div class="section" id="js-takeaways"></div>
+  </div>
+  <div class="report-footer" id="js-footer"></div>
+</div>
+
+<script>
+/* ================================================================
+   DATA — EDIT THIS BLOCK ONLY
+   Everything below renders automatically from these values.
+   ================================================================ */
+const DATA = {
+
+  /* HEADER */
+  homeTeam: "University of Michigan",
+  awayTeam: "Ohio State",
+  result:   "Win · 3–1",
+  date:     "Nov 05 2026",
+  score:    "25–22, 22–25, 25–19, 25–21",
+   arena: "Crisler Center",
+   season:   "2026 Season",
+website:  "",
+
+  /* COLORS */
+  colors: {
+    primary: "#00274C",
+    accent: "#FFCB05",
+    accentLight: "#FFE17A",
+    neutralBg: "#fafaf8"
+  },
+
+  /* MATCH OVERVIEW
+     homeNum / awayNum are used only for coloring (higher or lower = better).
+     home / away are the display strings shown on screen.
+     higherBetter: true  = higher number wins (sideout, efficiency, kills)
+     higherBetter: false = lower number wins (errors)             */
+  stats: [
+    { label: "Sideout %",           home: "63%",      away: "57%",      homeNum: 63,    awayNum: 57,    higherBetter: true  },
+    { label: "Hitting Efficiency",  home: ".268",     away: ".241",     homeNum: .268,  awayNum: .241,  higherBetter: true  },
+    { label: "Transition Eff.",     home: ".118",     away: ".195",     homeNum: .118,  awayNum: .195,  higherBetter: true  },
+    { label: "Kills / Atk Errors",  home: "42 / 11",  away: "38 / 13",  homeNum: 42/11, awayNum: 38/13, higherBetter: true  },
+    { label: "Aces / Errors",       home: "4 / 6",     away: "5 / 4",    homeNum: 4-6,   awayNum: 5-4,   higherBetter: true  },
+  ],
+
+/* ROTATION BREAKDOWN
+      sideout      – sideout % (number, e.g. 72)
+      confDiff    – vs. conference average (e.g. +9 or -19)
+      top50Diff   – vs. top 50 average (e.g. +5 or -12)
+      hitting      – hitting efficiency (e.g. .310)
+      serviceRating – avg serve rating 0–3 scale (DataVolley)
+      serveAtt     – serve attempts in this rotation
+      receiveAtt   – receive attempts in this rotation
+      flag         – true = highlight row                          */
+  rotations: [
+    { id: "R1", sideout: 72, confDiff:  9, top50Diff:  4, hitting:  .310, serviceRating: 2.4, serveAtt: 18, receiveAtt: 21, flag: false },
+    { id: "R2", sideout: 67, confDiff:  4, top50Diff: -2, hitting:  .290, serviceRating: 2.1, serveAtt: 15, receiveAtt: 17, flag: false },
+    { id: "R3", sideout: 44, confDiff:-19, top50Diff:-24, hitting:  .102, serviceRating: 1.8, serveAtt: 12, receiveAtt: 24, flag: true  },
+    { id: "R4", sideout: 65, confDiff:  2, top50Diff: -5, hitting:  .280, serviceRating: 2.3, serveAtt: 16, receiveAtt: 14, flag: false },
+    { id: "R5", sideout: 59, confDiff: -4, top50Diff:-11, hitting:  .245, serviceRating: 2.0, serveAtt: 14, receiveAtt: 18, flag: false },
+    { id: "R6", sideout: 70, confDiff:  7, top50Diff:  1, hitting:  .320, serviceRating: 2.5, serveAtt: 17, receiveAtt: 15, flag: false },
+  ],
+
+  /* PLAYER ATTACK SUMMARY */
+  players: [
+    { name: "Smith, A.",  pos: "OH", att: 38, kills: 16, errors: 4, eff:  .316, effIn:  .389, effOut:  .143 },
+    { name: "Chen, R.",   pos: "MB", att: 22, kills: 12, errors: 2, eff:  .455, effIn:  .500, effOut:  .200 },
+    { name: "Torres, M.", pos: "RS", att: 24, kills:  8, errors: 5, eff:  .125, effIn:  .280, effOut: -.100 },
+    { name: "Park, J.",   pos: "OH", att: 18, kills:  6, errors: 2, eff:  .222, effIn:  .300, effOut:  .100 },
+    { name: "Webb, K.",   pos: "MB", att: 14, kills:  7, errors: 1, eff:  .429, effIn:  .455, effOut:  .333 },
+  ],
+
+  /* CHARTS
+     file    – image filename (must be in same folder as this HTML)
+     caption – text shown below chart
+     icon    – emoji placeholder when file is missing             */
+  charts: [
+    { file: "rally_timeline_1.png",      caption: "Rally timeline - our team", icon: "📈" },
+    { file: "Rally_timeline_2.png",   caption: "Rally timeline - opponent",  icon: "📊" },
+    { file: "Attack_By_Quality.png",    caption: "In System vs Out of System Attack Efficiency and Attempts by Player",                  icon: "🔄" },
+  ],
+
+/* KEY TAKEAWAYS
+      title – bold opening phrase
+      body  – detail sentence(s)                                   */
+  takeaways: [
+    {
+      title: "R3 sideout: 44% (–19% vs. match average).",
+      body:  "Opponent served zone 1 on 40%+ of attempts in sets 3–4, generating 24 receive attempts in R3 — the highest of any rotation"
+    },
+    {
+      title: "Transition efficiency gap widened in sets 3–4.",
+      body:  ".118 vs. opponent's .195. Extended rallies (6+ contacts) were won at a lower rate across the final two sets"
+    },
+  ],
+
+};
+/* ================================================================
+   END OF DATA BLOCK
+   ================================================================ */
+
+function applyColors(colors) {
+  // Set CSS variables via inline styles
+  const root = document.documentElement.style;
+  root.setProperty("--primary", colors.primary);
+  root.setProperty("--accent", colors.accent);
+  root.setProperty("--accent-light", colors.accentLight);
+  root.setProperty("--neutral-bg", colors.neutralBg);
+
+  // Also inject a style tag for print/PDF compatibility
+  const style = document.createElement('style');
+  style.id = 'print-colors';
+  style.textContent = `
+    :root {
+      --primary: ${colors.primary};
+      --accent: ${colors.accent};
+      --accent-light: ${colors.accentLight};
+      --neutral-bg: ${colors.neutralBg};
+    }
+  `;
+  // Remove old style tag if exists
+  const oldStyle = document.getElementById('print-colors');
+  if (oldStyle) oldStyle.remove();
+  document.head.appendChild(style);
+}
+
+applyColors(DATA.colors);
+
+/* --- helpers --- */
+function effClass(v) {
+  return v >= .280 ? 'eff-good' : v >= .150 ? 'eff-ok' : 'eff-bad';
+}
+function fmtEff(v) {
+  const s = Math.abs(v).toFixed(3);
+  return v < 0 ? '–.' + s.split('.')[1] : s;
+}
+
+/* --- HEADER --- */
+document.getElementById('js-header').innerHTML = `
+  <div class="pre-label">Post-Match Analysis</div>
+  <div class="result-badge">${DATA.result}</div>
+  <h1><span class="home-team-accent">${DATA.homeTeam}</span> vs. ${DATA.awayTeam}</h1>
+  <div class="header-meta">
+    <span><strong>Date:</strong> ${DATA.date}</span>
+    <span><strong>Score:</strong> ${DATA.score}</span>
+     <span><strong>Arena:</strong> ${DATA.arena}</span>
+  </div>`;
+
+/* --- MATCH OVERVIEW (home | metric | away) --- */
+const statRows = DATA.stats.map(s => {
+  let hCls, aCls;
+  if (s.homeNum === s.awayNum) {
+    hCls = aCls = 'val-neutral';
+  } else if (s.higherBetter) {
+    hCls = s.homeNum > s.awayNum ? 'val-better' : 'val-worse';
+    aCls = s.awayNum > s.homeNum ? 'val-better' : 'val-worse';
+  } else {
+    hCls = s.homeNum < s.awayNum ? 'val-better' : 'val-worse';
+    aCls = s.awayNum < s.homeNum ? 'val-better' : 'val-worse';
+  }
+  return `<tr>
+    <td class="home-val ${hCls}">${s.home}</td>
+    <td class="metric-label">${s.label}</td>
+    <td class="away-val ${aCls}">${s.away}</td>
+  </tr>`;
+}).join('');
+
+document.getElementById('js-overview').innerHTML = `
+  <div class="section-title">Match Overview</div>
+  <table class="comparison-table">
+    <thead><tr>
+      <th class="home-col">${DATA.homeTeam}</th>
+      <th class="metric-col">Metric</th>
+      <th class="away-col">${DATA.awayTeam}</th>
+    </tr></thead>
+    <tbody>${statRows}</tbody>
+  </table>`;
+
+/* --- ROTATION BREAKDOWN --- */
+const rotRows = DATA.rotations.map(r => {
+  const barPct = Math.min(r.sideout, 100);
+  let barCls;
+  if      (r.sideout >= 68) { barCls = 'good'; }
+  else if (r.sideout <= 50) { barCls = 'bad';  }
+  else                       { barCls = 'warn'; }
+
+  function diffBadge(val, field) {
+    const sign = val >= 0 ? '+' : '';
+    let diffCls;
+    if      (val >=  5) { diffCls = 'pos'; }
+    else if (val <= -8) { diffCls = 'neg'; }
+    else               { diffCls = 'mid'; }
+    return `<span class="diff-badge ${diffCls}">${sign}${val}%</span>`;
+  }
+
+  const hitCls  = effClass(r.hitting);
+  const svcCls  = r.serviceRating >= 2.3 ? 'eff-good' : r.serviceRating >= 1.9 ? 'eff-ok' : 'eff-bad';
+
+  return `<tr class="${r.flag ? 'flag-row' : ''}">
+    <td><strong>${r.id}</strong></td>
+    <td><div class="bar-wrap">
+      <div class="bar-bg"><div class="bar-fill ${barCls}" style="width:${barPct}%"></div></div>
+      <span class="bar-val">${r.sideout}%</span>
+    </div></td>
+    <td>${diffBadge(r.confDiff, 'conf')}</td>
+    <td>${diffBadge(r.top50Diff, 'top50')}</td>
+    <td class="num-col"><span class="${hitCls}">${fmtEff(r.hitting)}</span></td>
+    <td class="num-col"><span class="${svcCls}">${r.serviceRating.toFixed(1)}</span></td>
+    <td class="num-col">${r.serveAtt}</td>
+    <td class="num-col">${r.receiveAtt}</td>
+  </tr>`;
+}).join('');
+
+document.getElementById('js-rotations').innerHTML = `
+  <div class="section-title">Rotation Breakdown</div>
+  <table class="rotation-table">
+    <thead><tr>
+      <th>Rot.</th>
+      <th>Sideout %</th>
+      <th>vs. Conf.</th>
+      <th>vs. Top 50</th>
+      <th class="num-col">Hitting Eff.</th>
+      <th class="num-col">Srv. Rating</th>
+      <th class="num-col">Srv. Att.</th>
+      <th class="num-col">Rcv. Att.</th>
+    </tr></thead>
+    <tbody>${rotRows}</tbody>
+  </table>`;
+
+/* --- PLAYER TABLE --- */
+const playerRows = DATA.players.map(p => `
+  <tr>
+    <td><strong>${p.name}</strong></td>
+    <td class="pos">${p.pos}</td>
+    <td>${p.att}</td>
+    <td>${p.kills}</td>
+    <td>${p.errors}</td>
+    <td><span class="${effClass(p.eff)}">${fmtEff(p.eff)}</span></td>
+    <td><span class="${effClass(p.effIn)}">${fmtEff(p.effIn)}</span></td>
+    <td><span class="${effClass(p.effOut)}">${fmtEff(p.effOut)}</span></td>
+  </tr>`).join('');
+
+document.getElementById('js-players').innerHTML = `
+  <div class="section-title">Player Attack Summary</div>
+  <table class="player-table">
+    <thead><tr>
+      <th>Player</th><th>Pos</th><th>Att</th><th>K</th><th>E</th>
+      <th>Efficiency</th><th>In-System Eff.</th><th>Out-of-System Eff.</th>
+    </tr></thead>
+    <tbody>${playerRows}</tbody>
+  </table>`;
+
+/* --- CHARTS --- */
+const chartItems = DATA.charts.map(c => `
+  <div class="col-card">
+    <div class="chart-wrap">
+      <img src="${c.file}" alt="${c.caption}" style="width:100%; display:block"
+           onload="this.nextElementSibling.style.display='none'"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div class="chart-placeholder" style="display: none;">
+        <span class="ph-icon">${c.icon}</span>
+        <span>${c.file} (not found)</span>
+      </div>
+    </div>
+    <p class="chart-caption">${c.caption}</p>
+  </div>`).join('');
+
+document.getElementById('js-charts').innerHTML = `
+  <div class="section-title">Match Breakdown</div>
+  <div class="one-col">${chartItems}</div>`;
+
+/* --- TAKEAWAYS --- */
+const twItems = DATA.takeaways.map(t => `
+  <li class="action">
+    <span class="tw-tag">Note</span>
+    <span><strong>${t.title}</strong> ${t.body}</span>
+  </li>`).join('');
+
+document.getElementById('js-takeaways').innerHTML = `
+  <div class="section-title">Key Takeaways</div>
+  <ul class="takeaway-list">${twItems}</ul>`;
+
+/* --- FOOTER --- */
+document.getElementById('js-footer').innerHTML = `
+  <span>${DATA.homeTeam} Volleyball · <strong>${DATA.season}</strong></span>
+  <span></span>`;
+</script>
+</body>
+</html>

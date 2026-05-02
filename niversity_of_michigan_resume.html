@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Duan - Volleyball Coach Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00274C;
+            --accent: #FFCB05;
+            --accent-light: #FFE17A;
+            --neutral-bg: #fafaf8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #eae8e3;
+            color: #2a2a2a;
+        }
+        .resume {
+            max-width: 1060px;
+            margin: 40px auto;
+            background: #fafaf8;
+            box-shadow: 0 6px 40px rgba(0,0,0,0.13);
+            display: flex;
+            min-height: 100vh;
+        }
+        /* SIDEBAR */
+        .sidebar {
+            width: 33%;
+            min-width: 260px;
+            background: var(--primary);
+            color: white;
+            padding: 50px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 4px solid var(--accent);
+        }
+        .sidebar img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.12);
+            object-fit: cover;
+            margin-bottom: 22px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sidebar h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 26px;
+            margin: 0 0 6px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+        .sidebar .title-label {
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .sidebar-section {
+            width: 100%;
+            font-size: 17px;
+        }
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            padding: 20px 15px;
+            margin-bottom: 20px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .sidebar-card:last-child { margin-bottom: 0; }
+        .sidebar-card .skill-item {
+            text-align: left;
+        }
+        .sidebar-section-title {
+            font-size: 17px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: white;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+            white-space: nowrap;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 17px;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.4;
+        }
+        .contact-item .icon {
+            width: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            opacity: 0.6;
+        }
+        .contact-item a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+        .contact-item a:hover { text-decoration: underline; }
+        .skill-item {
+            font-size: 17px;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .skill-item:last-child { margin-bottom: 0; }
+        .skill-item strong {
+            color: white;
+            font-weight: 600;
+        }
+        .skill-item .skill-detail {
+            color: rgba(255,255,255,0.55);
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            padding: 50px 45px;
+        }
+        .main h2 {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #1a2e4a;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+            margin: 0 0 22px;
+        }
+        .section { margin-bottom: 36px; }
+        .main-header + .section {
+            margin-top: 80px;
+        }
+        .section p {
+            font-size: 19px;
+            line-height: 1.75;
+            color: #3a3a3a;
+            margin: 0;
+        }
+
+        /* Experience items */
+        .exp-item { margin-bottom: 22px; }
+        .exp-item:last-child { margin-bottom: 0; }
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .exp-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .exp-org {
+            font-size: 13.5px;
+            color: #777;
+            font-weight: 400;
+        }
+        .exp-desc {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #444;
+            margin: 6px 0 0;
+        }
+        .exp-desc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .exp-desc a:hover { text-decoration: underline; }
+
+        /* Analytics items — slightly different treatment */
+        .analytics-item {
+            border-left: 3px solid var(--primary);
+            padding-left: 16px;
+            margin-bottom: 22px;
+        }
+        .analytics-item:last-child { margin-bottom: 0; }
+        .analytics-title {
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .analytics-subheader {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+        .analytics-subheader a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .analytics-subheader a:hover { text-decoration: underline; }
+        .analytics-desc {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #444;
+        }
+        .analytics-desc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .analytics-desc a:hover { text-decoration: underline; }
+        .private-note {
+            font-size: 14px;
+            font-style: italic;
+            color: #888;
+            font-weight: 400;
+        }
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 36px;
+            margin-top: 90px;
+        }
+        .main-header-left {
+            /* Name + Title stacked vertically */
+        }
+            .main-header-right {
+                text-align: right !important;
+                margin-top: -20px !important;
+            }
+        .main-header-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 17px;
+            color: #444;
+            align-items: flex-end;
+        }
+        .main-header-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid var(--primary);
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+        .main-header-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 35px;
+            color: #1a2e4a;
+            margin: 0 0 6px;
+        }
+        .main-header-title {
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin: 0 0 18px;
+        }
+        .main-header-contact a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .main-header-contact a:hover { text-decoration: underline; }
+        .entry-date {
+            float: right;
+            font-size: 15px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .resume { flex-direction: column; margin: 0; }
+            .sidebar, .main { width: 100%; }
+            .sidebar { padding: 40px 25px; }
+            .main { padding: 35px 25px; }
+        }
+        @media print {
+            @page { size: US Letter; margin: 0; }
+            html, body { margin: 0; padding: 0; background: white !important; height: 100% !important; }
+            .resume { margin: 0 !important; box-shadow: none !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: 33% 67% !important; height: 100% !important; padding: 0 !important; }
+            .sidebar { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; min-width: auto !important; align-self: stretch !important; padding: 0.3in !important; line-height: 1.5 !important; }
+            .main { padding: 0.3in !important; align-self: stretch !important; }
+            .sidebar, .main, .section, .analytics-item { page-break-inside: avoid; }
+            .section { margin-bottom: 24px !important; }
+            .main-header + .section { margin-top: 80px !important; }
+            .analytics-item { margin-bottom: 16px !important; }
+            .sidebar-section { margin-bottom: 20px !important; font-size: 14px !important; }
+            .sidebar-card {
+                background: rgba(255, 255, 255, 0.18) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                padding: 15px 12px !important;
+                margin-bottom: 15px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                text-align: center !important;
+            }
+            .sidebar img { width: 190px !important; height: 190px !important; margin-bottom: 18px !important; display: block !important; margin-left: auto !important; margin-right: auto !important; }
+            .sidebar h1 { font-size: 20px !important; }
+            .sidebar-section-title { font-size: 13px !important; margin-bottom: 8px !important; padding-bottom: 4px !important; white-space: nowrap !important; width: 100% !important; box-sizing: border-box !important; color: white !important; }
+            .sidebar-card .skill-item { text-align: left !important; }
+            .skill-item { font-size: 14px !important; margin-bottom: 6px !important; }
+            .contact-item { font-size: 14px !important; margin-bottom: 8px !important; }
+            .main h2 { font-family: 'Source Sans 3', sans-serif !important; font-size: 21px !important; margin-bottom: 12px !important; padding-bottom: 4px !important; }
+            .analytics-title { font-size: 16px !important; }
+            .analytics-subheader { font-size: 14px !important; color: #666 !important; margin-bottom: 4px !important; }
+            .analytics-desc, .exp-desc { font-size: 15px !important; line-height: 1.6 !important; }
+            .entry-date { font-size: 14px !important; }
+            .private-note { font-size: 13px !important; }
+            .main-header {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: flex-end !important;
+                margin-bottom: 24px !important;
+                margin-top: 60px !important;
+            }
+            .main-header-contact {
+                font-size: 13px !important;
+                gap: 3px !important;
+                align-items: flex-end !important;
+            }
+            .main-header-img {
+                width: 80px !important;
+                height: 80px !important;
+                border: 3px solid var(--primary) !important;
+                margin-bottom: 12px !important;
+            }
+            .main-header-name { font-size: 28px !important; }
+            .main-header-title { font-size: 13px !important; margin-bottom: 12px !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="resume">
+
+     <!-- SIDEBAR -->
+    <div class="sidebar">
+        <img src="headshot.png" alt="John Duan" class="sidebar-profile-img">
+        <div class="sidebar-section sidebar-card">
+            <div class="sidebar-section-title">Tech & Video Skills</div>
+            <div class="skill-item"><strong>Video Analysis</strong> <span class="skill-detail">Hudl, DataVolley</span></div>
+            <div class="skill-item"><strong>Data Analysis & Visualization</strong> <span class="skill-detail">Python, pandas, interactive dashboards, web tools</span></div>
+            <div class="skill-item"><strong>Spreadsheets</strong> <span class="skill-detail">Excel, Google Sheets</span></div>
+            <div class="skill-item"><strong>Video Editing</strong> <span class="skill-detail">DaVinci Resolve, Adobe Premiere, After Effects</span></div>
+            <div class="skill-item"><strong>Social Media</strong> <span class="skill-detail">YouTube, Instagram, TikTok</span></div>
+        </div>
+
+        <div class="sidebar-section sidebar-card">
+            <div class="sidebar-section-title">Certification</div>
+                <strong>USA Volleyball Certified</strong><br>
+                Great Lakes Region<br>
+                2025 – Present
+        </div>
+
+        <div class="sidebar-section sidebar-card">
+            <div class="sidebar-section-title">Education</div>
+            <strong>University of Michigan</strong><br>
+            B.S. Data Science & Economics<br>
+             Ann Arbor · 2021
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        <div class="main-header">
+            <div class="main-header-left">
+                <h1 class="main-header-name">John Duan</h1>
+                <p class="main-header-title">Video & Analytics Coordinator</p>
+            </div>
+            <div class="main-header-right">
+                <div class="main-header-contact">
+                    <span>✉ duanjohn99@gmail.com</span>
+                    <span>☎ (248) 804-2111</span>
+                    <span>𝕏 <a href="https://x.com/LearningVolley">@LearningVolley</a></span>
+                    <span>🌐 <a href="https://learningvolleyball.com">learningvolleyball.com</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Volleyball Analytics, Film & Coaching</h2>
+
+            <div class="analytics-item">
+                <div class="analytics-title">Custom Hudl Reporting Dashboard <span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-subheader"><a href="#">fhs.learningvolleyball.com</a> <span class="private-note">(private, access upon request)</span></div>
+                <div class="analytics-desc">Built a custom Hudl analytics pipeline to extract play-by-play data, generate rotation breakdowns, and automate post-match reports for scouting, lineup evaluation, and opponent prep.</div>
+            </div>
+
+            <div class="analytics-item">
+                <div class="analytics-title">Volleyball Analytics <span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-subheader"><a href="https://x.com/LearningVolley">@LearningVolley</a> on X</div>
+                <div class="analytics-desc">Established volleyball analytics presence followed by coaches across Big Ten, SEC, and Big South programs, sharing match insights, statistical breakdowns, and coaching-focused analysis.</div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <div class="analytics-item">
+                <div class="analytics-title">Video Editing and Social Media <span class="entry-date">2025 – Present</span></div>
+                <div class="analytics-desc">Produced volleyball video content across platforms, with multiple videos reaching 10K–100K+ views. Experience in editing concise, engaging volleyball content and visual storytelling.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="analytics-item">
+                <div class="analytics-title">Assistant Coach <span class="entry-date">2026 – Present</span></div>
+                <div class="analytics-subheader">Farmington High School <span class="private-note">(Top 5 Ranked in Michigan)</span></div>
+                <div class="analytics-desc">Head coach for JV program and varsity support staff for a Top-5 ranked boys program in Michigan. Manage match stats, opponent scouting, and film review while supporting practices and player development.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Professional Background</h2>
+
+            <div class="analytics-item">
+                <div class="analytics-title">Software Engineer<span class="entry-date">2022 – 2024</span></div>
+                <div class="analytics-subheader">Amazon</div>
+                <div class="analytics-desc">Built data systems and analytical workflows at scale.</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+const RESUME_DATA = {
+  colors: {
+    primary: "#00274C",
+    accent: "#FFCB05",
+    accentLight: "#FFE17A",
+    neutralBg: "#fafaf8"
+  }
+};
+
+function applyColors(colors) {
+  const root = document.documentElement.style;
+  root.setProperty("--primary", colors.primary);
+  root.setProperty("--accent", colors.accent);
+  root.setProperty("--accent-light", colors.accentLight);
+  root.setProperty("--neutral-bg", colors.neutralBg);
+}
+
+applyColors(RESUME_DATA.colors);
+</script>
+</body>
+</html>
