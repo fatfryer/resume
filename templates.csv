@@ -1,8 +1,68 @@
-homeTeam,awayTeam,date,arena,primary,accent,neutral_bg
-Farmington,Rochester Adams,Oct 14 2026,Farmington HS Arena,#B61E2E,#e8a030,#fafaf8
-University of Michigan,Ohio State,Nov 05 2026,Crisler Center,#00274C,#FFCB05,#fafaf8
-University of Illinois Urbana-Champaign,Northwestern,Oct 21 2026,Huff Hall,#E87722,#13294B,#fafaf8
-Northwestern University,Illinois,Nov 02 2026,Welsh-Ryan Arena,#4E2A84,#B6ACD1,#fafaf8
-Indiana University Bloomington,Purdue,Oct 28 2026,Wilkinson Hall,#990000,#EDEBEB,#fafaf8
-Indiana University Indianapolis,Northern Kentucky University,Nov 09 2026,IU Indianapolis Gym,#990000,#EDEBEB,#fafaf8
-Butler University,Xavier University,Nov 16 2026,Hinkle Fieldhouse,#13294B,#D1E0D7,#fafaf8
+homeTeam,awayTeam,date,arena,primary,accent,neutral_bg,confirmation
+University of Michigan,Ohio State,Nov 05 2026,Crisler Center,#00274C,#FFCB05,#fafaf8,y
+University of Illinois Urbana-Champaign,Northwestern,Oct 21 2026,Huff Hall,#E87722,#13294B,#fafaf8,y
+Northwestern University,Illinois,Nov 02 2026,Welsh-Ryan Arena,#4E2A84,#FFFFFF,#fafaf8,y
+Indiana University Bloomington,Purdue,Oct 28 2026,Wilkinson Hall,#990000,#EDEBEB,#fafaf8,y
+Indiana University Indianapolis,Northern Kentucky University,Nov 09 2026,IU Indianapolis Gym,#990000,#EDEBEB,#fafaf8,y
+Butler University,Xavier University,Nov 16 2026,Hinkle Fieldhouse,#13294B,#FFFFFF,#fafaf8,y
+Clemson University,TBD,TBD,Jervey Athletic Center,#522D80,#F56600,,#fafaf8,
+North Carolina State University,TBD,TBD,Reynolds Coliseum,#CC0000,#000000,#fafaf8,
+University of North Carolina at Chapel Hill,TBD,TBD,Carmichael Arena,#4B9CD3,#13294B,#fafaf8,
+Duke University,TBD,TBD,Cameron Indoor Stadium,#001A57,#FFFFFF,#fafaf8,
+Florida State University,TBD,TBD,Tully Gymnasium,#782F40,#CEB888,#fafaf8,
+Rice University,TBD,TBD,Tudor Fieldhouse,#00205B,#C4CED4,#fafaf8,
+Indiana Tech University,TBD,TBD,Schaefer Center,#FFC72C,#13294B,#fafaf8,
+Purdue University Fort Wayne,TBD,TBD,Hilliard Gates Sports Center,#000000,#FFB81C,#fafaf8,
+Purdue University,TBD,TBD,Holloway Gymnasium,#000000,#FFB81C,#fafaf8,
+Ball State University,TBD,TBD,Worthen Arena,#BA0C2F,#FFFFFF,#fafaf8,
+Marian University (Indiana),TBD,TBD,TBD,#13294B,#FFC72C,#fafaf8,
+Indiana Wesleyan University,TBD,TBD,Luckey Arena,#00694E,#FFB81C,#fafaf8,
+Indiana State University,TBD,TBD,ISU Arena,#0033A0,#FFFFFF,#fafaf8,
+Western Michigan University,TBD,TBD,University Arena,#6A0032,#FFB81C,#fafaf8,
+Bowling Green State University,TBD,TBD,Stroh Center,#FFD100,#000000,#fafaf8,
+University of Dayton,TBD,TBD,UD Arena,#C41230,#0033A0,#fafaf8,
+Xavier University,TBD,TBD,Cintas Center,#003366,#FFFFFF,#fafaf8,
+University of Cincinnati,TBD,TBD,Fifth Third Arena,#E00122,#000000,#fafaf8,
+Miami University (Ohio),TBD,TBD,Millett Hall,#C41230,#0033A0,#fafaf8,
+DePaul University,TBD,TBD,McGrath-Phillips Arena,#003366,#C4CED4,#fafaf8,
+St. John's University,TBD,TBD,Carnesecca Arena,#C41230,#0033A0,#fafaf8,
+University of Chicago,TBD,TBD,Ratner Athletics Center,#0072CE,#C4CED4,#fafaf8,
+Illinois State University,TBD,TBD,Redbird Arena,#E00122,#FFFFFF,#fafaf8,
+University of Toledo,TBD,TBD,Savage Arena,#0033A0,#FFB81C,#fafaf8,
+Eastern Michigan University,TBD,TBD,Convocation Center,#0072CE,#FFB81C,#fafaf8,
+Oakland University,TBD,TBD,OU Credit Union O'rena,#000000,#FFB81C,#fafaf8,
+Wayne State University (Michigan),TBD,TBD,Matthaei Center,#003366,#C4CED4,#fafaf8,
+Calvin University,TBD,TBD,Van Noord Arena,#003366,#FFB81C,#fafaf8,
+Ferris State University,TBD,TBD,Jim Wink Arena,#003366,#C4CED4,#fafaf8,
+Michigan State University,TBD,TBD,Jenison Fieldhouse,#18453B,#FFFFFF,#fafaf8,
+Ohio University,TBD,TBD,The Convo,#00694E,#FFFFFF,#fafaf8,
+University of Notre Dame,TBD,TBD,Purcell Pavilion,#001C54,#C4CED4,#fafaf8,
+Valparaiso University,TBD,TBD,Athletics-Recreation Center,#6A0032,#FFB81C,#fafaf8,
+Vanderbilt University,TBD,TBD,Memorial Gymnasium,#C4CED4,#000000,#fafaf8,
+University of Tennessee,TBD,TBD,Thompson-Boling Arena,#FF8200,#FFFFFF,#fafaf8,
+Kansas State University,TBD,TBD,Bramlage Coliseum,#512888,#FFFFFF,#fafaf8,
+Ohio State University,TBD,TBD,Covelli Center,#BB0000,#666666,#fafaf8,
+Temple University,TBD,TBD,Liacouras Center,#C41230,#0033A0,#fafaf8,
+Emory University,TBD,TBD,Woodruff PE Center,#003366,#C4CED4,#fafaf8,
+Washington University in St. Louis,TBD,TBD,Francis Field House,#C41230,#00694E,#fafaf8,
+University of Southern Indiana,TBD,TBD,Screaming Eagles Arena,#003366,#FFB81C,#fafaf8,
+University of Missouri,TBD,TBD,Hearnes Center,#FFC72C,#000000,#fafaf8,
+Western Kentucky University,TBD,TBD,E. A. Diddle Arena,#C41230,#0033A0,#fafaf8,
+Marquette University,TBD,TBD,Al McGuire Center,#003366,#C4CED4,#fafaf8,
+St. Francis University (Pennsylvania),TBD,TBD,DeGol Arena,#C41230,#000000,#fafaf8,
+Princeton University,TBD,TBD,Dillon Gymnasium,#E00122,#000000,#fafaf8,
+Morehead State University,TBD,TBD,Ellis Johnson Arena,#003366,#FFB81C,#fafaf8,
+Eastern Kentucky University,TBD,TBD,McBrayer Arena,#800000,#FFFFFF,#fafaf8,
+Youngstown State University,TBD,TBD,Beeghly Center,#C41230,#0033A0,#fafaf8,
+Winthrop University,TBD,TBD,Winthrop Coliseum,#782F40,#C4CED4,#fafaf8,
+Rider University,TBD,TBD,Alumni Gymnasium,#800000,#FFFFFF,#fafaf8,
+St. Xavier University (Chicago),TBD,TBD,Shannon Center,#003366,#FFB81C,#fafaf8,
+Bethel University (Indiana),TBD,TBD,Wiegand Hall,#003366,#FFB81C,#fafaf8,
+Ottawa University Arizona,TBD,TBD,TBD,#003366,#FFB81C,#fafaf8,
+Cedarville University,TBD,TBD,Callan Athletic Center,#003366,#FFFFFF,#fafaf8,
+Illinois Wesleyan University,TBD,TBD,Shirk Center,#00694E,#FFFFFF,#fafaf8,
+Hope College,TBD,TBD,DeVos Fieldhouse,#FF8200,#003366,#fafaf8,
+University of La Verne,TBD,TBD,TBD,#003366,#C4CED4,#fafaf8,
+University of Wisconsin-Oshkosh,TBD,TBD,Kolf Sports Center,#FFD100,#000000,#fafaf8,
+Massachusetts Institute of Technology,TBD,TBD,Rockwell Cage,#C41230,#C4CED4,#fafaf8,
+Johns Hopkins University,TBD,TBD,Goldfarb Gymnasium,#003366,#FFFFFF,#fafaf8,

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates.csv Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 20px;
+            background-color: #fafafa;
+        }
+        h1 { color: #333; }
+        .info { color: #666; margin-bottom: 20px; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th {
+            padding: 10px 8px;
+            text-align: left;
+            background-color: #e0e0e0;
+            border-bottom: 2px solid #ccc;
+            position: sticky;
+            top: 0;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        tr.zebra-even { background-color: #ffffff; }
+        tr.zebra-odd { background-color: #f9f9f9; }
+        tr.good-row { background-color: #d4edda !important; }
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .color-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .color-name {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .error {
+            color: #cc0000;
+            padding: 20px;
+            background: #fee;
+            border: 1px solid #cc0000;
+            border-radius: 4px;
+        }
+        .controls {
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #0072CE;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background: #005a9e; }
+    </style>
+</head>
+<body>
+    <h1>Templates.csv Preview</h1>
+    <div class="info">Open at <code>http://localhost:8000/templates_preview.html</code> (run <code>python3 -m http.server 8000</code> in project dir)</div>
+    
+    <div class="controls">
+        <button onclick="loadCSV()">Reload CSV</button>
+        <span id="status" style="margin-left: 10px; color: #666;"></span>
+    </div>
+
+    <div id="table-container"></div>
+
+    <script>
+        // Color name mappings for hex codes in templates.csv
+        const colorNames = {
+            "#000000": "black",
+            "#001A57": "Duke blue",
+            "#001C54": "Notre Dame blue",
+            "#00205B": "Rice blue",
+            "#00274C": "Michigan blue",
+            "#003366": "dark blue",
+            "#0033A0": "navy blue",
+            "#00694E": "dark green",
+            "#0072CE": "Chicago blue",
+            "#13294B": "Illinois blue",
+            "#18453B": "MSU green",
+            "#4B9CD3": "UNC blue",
+            "#4E2A84": "purple",
+            "#512888": "Kansas State purple",
+            "#666666": "gray",
+            "#6A0032": "dark red",
+            "#782F40": "FSU garnet",
+            "#800000": "maroon",
+            "#990000": "Indiana crimson",
+            "#BA0C2F": "Bulldog red",
+            "#BB0000": "Ohio State scarlet",
+            "#C41230": "cardinal red",
+            "#C4CED4": "silver",
+            "#CC0000": "NC State red",
+            "#CEB888": "metallic gold",
+            "#E00122": "red",
+            "#E87722": "Illinois orange",
+            "#EDEBEB": "light gray",
+            "#F56600": "Clemson orange",
+            "#FAFAF8": "off-white",
+            "#FF8200": "Tennessee orange",
+            "#FFB81C": "Purdue gold",
+            "#FFC72C": "gold",
+            "#FFCB05": "maize",
+            "#FFD100": "yellow",
+            "#FFFFFF": "white"
+        };
+
+        const HEX_COLUMNS = ["primary", "accent", "neutral_bg"];
+
+        function normalizeHex(hex) {
+            hex = hex.trim().toUpperCase();
+            if (!hex.startsWith("#")) hex = "#" + hex;
+            return hex;
+        }
+
+        function getColorName(hex) {
+            const normalized = normalizeHex(hex);
+            return colorNames[normalized] || "Custom";
+        }
+
+        function formatHexCell(hexValue) {
+            const hex = normalizeHex(hexValue);
+            const name = getColorName(hexValue);
+            return `<div class="color-container">
+                <div class="color-swatch" style="background-color: ${hex};"></div>
+                <span>${hex} <span class="color-name">(${name})</span></span>
+            </div>`;
+        }
+
+        function isGoodRow(row, headers) {
+            // Check 1: No TBD in any column
+            for (const header of headers) {
+                if (row[header] && row[header].trim() === "TBD") {
+                    return false;
+                }
+            }
+            // Check 2: confirmation column is 'y'
+            const confirmation = (row["confirmation"] || "").trim().toLowerCase();
+            return confirmation === "y";
+        }
+
+        function parseCSV(text) {
+            const lines = text.split("\n").filter(line => line.trim());
+            if (lines.length === 0) return { headers: [], rows: [] };
+            
+            const headers = lines[0].split(",").map(h => h.trim());
+            const rows = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(",");
+                const row = {};
+                headers.forEach((header, idx) => {
+                    row[header] = (values[idx] || "").trim();
+                });
+                rows.push(row);
+            }
+            
+            return { headers, rows };
+        }
+
+        function renderTable(data) {
+            const container = document.getElementById("table-container");
+            
+            if (data.headers.length === 0) {
+                container.innerHTML = '<div class="error">No data found in CSV</div>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>#</th>';
+            data.headers.forEach(h => { html += `<th>${h}</th>`; });
+            html += '</tr></thead><tbody>';
+
+            data.rows.forEach((row, idx) => {
+                const isGood = isGoodRow(row, data.headers);
+                const zebraClass = idx % 2 === 0 ? "zebra-even" : "zebra-odd";
+                const rowClass = isGood ? "good-row" : zebraClass;
+                
+                html += `<tr class="${rowClass}"><td>${idx + 1}</td>`;
+                data.headers.forEach(header => {
+                    const value = row[header] || "";
+                    if (HEX_COLUMNS.includes(header)) {
+                        html += `<td>${formatHexCell(value)}</td>`;
+                    } else {
+                        html += `<td>${value}</td>`;
+                    }
+                });
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+            document.getElementById("status").textContent = `Loaded ${data.rows.length} rows`;
+        }
+
+        function showError(msg) {
+            document.getElementById("table-container").innerHTML = `<div class="error">${msg}</div>`;
+            document.getElementById("status").textContent = "Error";
+        }
+
+        async function loadCSV() {
+            document.getElementById("status").textContent = "Loading...";
+            try {
+                const response = await fetch("templates.csv");
+                if (!response.ok) throw new Error("Failed to load templates.csv");
+                const text = await response.text();
+                const data = parseCSV(text);
+                renderTable(data);
+            } catch (err) {
+                showError(`Error: ${err.message}<br><br>Make sure to run:<br><code>cd /home/lance/Work/GAVC && python3 -m http.server 8000</code><br>Then open <code>http://localhost:8000/templates_preview.html</code>`);
+            }
+        }
+
+        // Load on page load
+        loadCSV();
+    </script>
+</body>
+</html>
