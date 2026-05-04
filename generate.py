@@ -88,6 +88,10 @@ def main():
         sys.exit(1)
     
     output_dir = os.path.dirname(csv_path) or "."
+    
+    # Schools subdirectory
+    schools_dir = os.path.join(output_dir, "schools")
+    os.makedirs(schools_dir, exist_ok=True)
 
     with open(csv_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -98,7 +102,7 @@ def main():
                 continue
 
             slug = slugify(home_team)
-            school_dir = os.path.join(output_dir, slug)
+            school_dir = os.path.join(schools_dir, slug)
             os.makedirs(school_dir, exist_ok=True)
             colors = {
                 "primary": row["primary"].strip(),
