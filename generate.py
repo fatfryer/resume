@@ -2,14 +2,15 @@
 """
 Unified HTML generator for resumes and match reports.
 Reads a unified CSV and generates BOTH resume + match report HTML files for each row.
-Also generates PDF versions using Chrome/Playwright.
 
 CSV columns: homeTeam,awayTeam,date,arena,primary,accent,neutral_bg
 
 Every row generates:
 - {slug_homeTeam}_resume.html (with colors from CSV)
 - {slug_homeTeam}_match_report.html (with team/date/arena + colors from CSV)
-- {slug_homeTeam}_resume.pdf (default margins, no header/footer)
+
+Optional: Use --pdf flag to also generate PDF versions:
+- {slug_homeTeam}_resume.pdf (zero margins, no header/footer)
 - {slug_homeTeam}_match_report.pdf (no margins, pages 1-2 only, no header/footer)
 """
 
@@ -18,6 +19,7 @@ import re
 import sys
 import os
 import asyncio
+import argparse
 from playwright.async_api import async_playwright
 
 
@@ -152,6 +154,10 @@ async def generate_pdfs(pdf_tasks):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Generate HTML and optionally PDFs for schools")
+    parser.add_argument("--pdf", action="store_true", help="Generate PDFs from HTML files")
+    args = parser.parse_args()
+
     # Hardcoded path to templates.csv in the same directory as this script
     csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates.csv")
     
@@ -204,10 +210,12 @@ def main():
             print(f"Generated: {report_out}")
             pdf_tasks.append((report_out, "match_report"))
 
-    # Generate PDFs
-    if pdf_tasks:
+    # Generate PDFs only if --pdf flag is passed
+    if args.pdf and pdf_tasks:
         print("\nGenerating PDFs...")
         asyncio.run(generate_pdfs(pdf_tasks))
+    elif pdf_tasks:
+        print(f"\nHTML files generated. Use --pdf flag to generate PDFs.")
 
 
 if __name__ == "__main__":
