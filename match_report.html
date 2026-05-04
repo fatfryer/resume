@@ -92,6 +92,7 @@
   /* BODY */
   .report-body { padding: 40px 44px; }
   .section { margin-bottom: 28px; }
+  #js-charts { margin-top: 20px; }
   .section-title {
     font-size: 11px;
     font-weight: 700;
@@ -230,7 +231,7 @@
     justify-content: center; min-height: 150px; color: #bbb; font-size: 12px; gap: 6px;
   }
   .chart-placeholder .ph-icon { font-size: 26px; opacity: 0.4; }
-  .chart-caption { font-size: 12px; color: #888; font-style: italic; margin-top: 4px; }
+  .chart-caption { font-size: 12px; color: #888; font-style: italic; margin-top: 4px; text-align: center; }
 
   /* TAKEAWAYS */
   .takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -309,6 +310,7 @@
     }
     /* Sync screen style changes to print */
     .section-title { padding-bottom: 6px !important; margin-bottom: 14px !important; }
+    #js-charts { margin-top: 20px !important; }
     .chart-wrap { min-height: 120px !important; }
     .chart-wrap img { width: 80% !important; margin:0 auto !important; }
     .chart-caption { margin-top: 4px !important; }
@@ -323,9 +325,9 @@
     .player-table { font-size: 13px !important; }
     .player-table th { padding: 7px 10px !important; font-size: 10px !important; }
     .player-table td { padding: 6px 10px !important; }
-    /* Takeaway sync */
-    .takeaway-list { gap: 8px !important; }
-    .takeaway-list li { padding: 10px 12px !important; }
+    /* Takeaway sync - more compact for print */
+    .takeaway-list { gap: 6px !important; }
+    .takeaway-list li { padding: 8px 10px !important; font-size: 13px !important; }
     @page { size: US Letter; margin: 0.5in; }
   }
   @media (max-width: 640px) {
@@ -345,7 +347,6 @@
     <div class="section" id="js-charts"></div>
     <div class="section" id="js-takeaways"></div>
   </div>
-  <div class="report-footer" id="js-footer"></div>
 </div>
 
 <script>
@@ -625,10 +626,6 @@ document.getElementById('js-takeaways').innerHTML = `
   <div class="section-title">Key Takeaways</div>
   <ul class="takeaway-list">${twItems}</ul>`;
 
-/* --- FOOTER --- */
-document.getElementById('js-footer').innerHTML = `
-  <span>${DATA.homeTeam} Volleyball · <strong>${DATA.season}</strong></span>
-  <span></span>`;
 </script>
 </body>
 </html>
