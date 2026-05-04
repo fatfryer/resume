@@ -138,8 +138,8 @@ async def generate_pdfs(pdf_tasks):
             }
             
             if doc_type == "resume":
-                # Chrome default print margins (~0.5in)
-                pdf_options["margin"] = {"top": "0.5in", "bottom": "0.5in", "left": "0.5in", "right": "0.5in"}
+                # Zero margins for resume
+                pdf_options["margin"] = {"top": "0", "bottom": "0", "left": "0", "right": "0"}
             elif doc_type == "match_report":
                 pdf_options["margin"] = {"top": "0", "bottom": "0", "left": "0", "right": "0"}
                 pdf_options["page_ranges"] = "1-2"
