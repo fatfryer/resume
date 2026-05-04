@@ -474,6 +474,11 @@ const statRows = DATA.stats.map(s => {
 document.getElementById('js-overview').innerHTML = `
   <div class="section-title">Match Overview</div>
   <table class="comparison-table">
+    <colgroup>
+      <col style="width: 40%;">
+      <col style="width: 20%;">
+      <col style="width: 40%;">
+    </colgroup>
     <thead><tr>
       <th class="home-col">${DATA.homeTeam}</th>
       <th class="metric-col">Metric</th>
