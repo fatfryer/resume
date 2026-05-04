@@ -600,7 +600,7 @@ document.getElementById('js-players').innerHTML = `
 const chartItems = DATA.charts.map(c => `
   <div class="col-card">
     <div class="chart-wrap">
-      <img src="${c.file}" alt="${c.caption}" style="width:100%; display:block"
+      <img src="../${c.file}" alt="${c.caption}" style="width:100%; display:block"
            onload="this.nextElementSibling.style.display='none'"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
       <div class="chart-placeholder" style="display: none;">

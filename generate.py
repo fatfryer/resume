@@ -98,6 +98,8 @@ def main():
                 continue
 
             slug = slugify(home_team)
+            school_dir = os.path.join(output_dir, slug)
+            os.makedirs(school_dir, exist_ok=True)
             colors = {
                 "primary": row["primary"].strip(),
                 "accent": row["accent"].strip(),
@@ -105,7 +107,7 @@ def main():
             }
 
             # Generate Resume (always)
-            resume_out = os.path.join(output_dir, f"{slug}_resume.html")
+            resume_out = os.path.join(school_dir, "resume.html")
             with open(os.path.join(output_dir, "resume.html"), "r", encoding="utf-8") as tf:
                 resume_content = tf.read()
             resume_content = replace_resume_colors(resume_content, colors)
@@ -114,7 +116,7 @@ def main():
             print(f"Generated: {resume_out}")
 
             # Generate Match Report (always)
-            report_out = os.path.join(output_dir, f"{slug}_match_report.html")
+            report_out = os.path.join(school_dir, "match_report.html")
             with open(os.path.join(output_dir, "match_report.html"), "r", encoding="utf-8") as tf:
                 report_content = tf.read()
             report_content = replace_report_data(report_content, row, colors)
