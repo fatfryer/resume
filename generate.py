@@ -2,18 +2,23 @@
 """
 Unified HTML generator for resumes and match reports.
 Reads a unified CSV and generates BOTH resume + match report HTML files for each row.
+Also generates PDF versions using Chrome/Playwright.
 
 CSV columns: homeTeam,awayTeam,date,arena,primary,accent,neutral_bg
 
 Every row generates:
 - {slug_homeTeam}_resume.html (with colors from CSV)
 - {slug_homeTeam}_match_report.html (with team/date/arena + colors from CSV)
+- {slug_homeTeam}_resume.pdf (default margins, no header/footer)
+- {slug_homeTeam}_match_report.pdf (no margins, pages 1-2 only, no header/footer)
 """
 
 import csv
 import re
 import sys
 import os
+import asyncio
+from playwright.async_api import async_playwright
 
 
 def slugify(text):
@@ -79,6 +84,73 @@ def replace_report_data(content, row, colors):
     return content
 
 
+async def generate_pdfs(pdf_tasks):
+    """Generate PDFs from HTML files using Playwright with Chrome."""
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(channel="chrome")
+        for html_path, doc_type in pdf_tasks:
+            pdf_path = html_path.replace(".html", ".pdf")
+            page = await browser.new_page()
+            
+            # Navigate to HTML file
+            await page.goto(f"file://{html_path}", wait_until="networkidle")
+            
+            # Wait for dynamically loaded images to finish
+            await page.wait_for_function("""
+                () => {
+                    const imgs = document.querySelectorAll('img');
+                    return Array.from(imgs).every(img => img.complete && img.naturalWidth > 0);
+                }
+            """)
+            
+            # Override @page margin in CSS to avoid conflicts with print margins
+            await page.evaluate("""
+                () => {
+                    const styleSheets = document.styleSheets;
+                    for (let sheet of styleSheets) {
+                        try {
+                            const rules = sheet.cssRules || sheet.rules;
+                            for (let i = rules.length - 1; i >= 0; i--) {
+                                const rule = rules[i];
+                                if (rule.type === CSSRule.PAGE_RULE) {
+                                    rule.style.margin = '';
+                                }
+                                // Also handle @media print { @page { margin: 0; } }
+                                if (rule.type === CSSRule.MEDIA_RULE) {
+                                    const mediaRules = rule.cssRules || rule.rules;
+                                    for (let j = 0; j < mediaRules.length; j++) {
+                                        if (mediaRules[j].type === CSSRule.PAGE_RULE) {
+                                            mediaRules[j].style.margin = '';
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (e) {}
+                    }
+                }
+            """)
+            
+            pdf_options = {
+                "path": pdf_path,
+                "display_header_footer": False,
+                "prefer_css_page_size": False,
+                "print_background": True,  # Ensure images and colors render
+            }
+            
+            if doc_type == "resume":
+                # Chrome default print margins (~0.5in)
+                pdf_options["margin"] = {"top": "0.5in", "bottom": "0.5in", "left": "0.5in", "right": "0.5in"}
+            elif doc_type == "match_report":
+                pdf_options["margin"] = {"top": "0", "bottom": "0", "left": "0", "right": "0"}
+                pdf_options["page_ranges"] = "1-2"
+            
+            await page.pdf(**pdf_options)
+            await page.close()
+            print(f"Generated PDF: {pdf_path}")
+        
+        await browser.close()
+
+
 def main():
     # Hardcoded path to templates.csv in the same directory as this script
     csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates.csv")
@@ -92,6 +164,8 @@ def main():
     # Schools subdirectory
     schools_dir = os.path.join(output_dir, "schools")
     os.makedirs(schools_dir, exist_ok=True)
+
+    pdf_tasks = []
 
     with open(csv_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -118,6 +192,7 @@ def main():
             with open(resume_out, "w", encoding="utf-8") as out:
                 out.write(resume_content)
             print(f"Generated: {resume_out}")
+            pdf_tasks.append((resume_out, "resume"))
 
             # Generate Match Report (always)
             report_out = os.path.join(school_dir, "match_report.html")
@@ -127,6 +202,12 @@ def main():
             with open(report_out, "w", encoding="utf-8") as out:
                 out.write(report_content)
             print(f"Generated: {report_out}")
+            pdf_tasks.append((report_out, "match_report"))
+
+    # Generate PDFs
+    if pdf_tasks:
+        print("\nGenerating PDFs...")
+        asyncio.run(generate_pdfs(pdf_tasks))
 
 
 if __name__ == "__main__":
